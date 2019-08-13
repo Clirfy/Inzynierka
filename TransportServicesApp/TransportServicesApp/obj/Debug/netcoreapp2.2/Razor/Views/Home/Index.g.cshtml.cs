@@ -23,8 +23,18 @@ using TransportServicesApp.Models;
 
 #line default
 #line hidden
+#line 3 "C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\Views\_ViewImports.cshtml"
+using TransportServicesApp.ViewModels;
+
+#line default
+#line hidden
+#line 4 "C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"99464617055fdb505bb0bb7fd91f9b14f7b0d030", @"/Views/Home/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a5f9676ca28c532aeb2c6eaee4f1134663742c48", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"90866365b0e2ba9c5feea6355549a46a744b22ca", @"/Views/_ViewImports.cshtml")]
     public class Views_Home_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

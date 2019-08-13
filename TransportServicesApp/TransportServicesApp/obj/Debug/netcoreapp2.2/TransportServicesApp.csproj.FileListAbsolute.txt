@@ -29,3 +29,4 @@ C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\
 C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\TransportServicesApp.pdb
 C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\TransportServicesApp.csproj.CopyComplete
 C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Account\Register.g.cshtml.cs
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Account\Login.g.cshtml.cs

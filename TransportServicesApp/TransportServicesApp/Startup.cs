@@ -31,8 +31,14 @@ namespace TransportServicesApp
             services.AddDbContextPool<AppDbContext>(options => options.UseSqlite(Configuration["SqlConnection"]));
             
             //Identity service
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 1;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+            }).AddEntityFrameworkStores<AppDbContext>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
