@@ -21,3 +21,11 @@ C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\
 C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\_ViewStart.g.cshtml.cs
 C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\TransportServicesApp.RazorTargetAssemblyInfo.cache
 C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\TransportServicesApp.RazorTargetAssemblyInfo.cs
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\bin\Debug\netcoreapp2.2\TransportServicesApp.pdb
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\bin\Debug\netcoreapp2.2\TransportServicesApp.Views.dll
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\bin\Debug\netcoreapp2.2\TransportServicesApp.Views.pdb
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\TransportServicesApp.Views.pdb
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\TransportServicesApp.dll
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\TransportServicesApp.pdb
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\TransportServicesApp.csproj.CopyComplete
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Account\Register.g.cshtml.cs
