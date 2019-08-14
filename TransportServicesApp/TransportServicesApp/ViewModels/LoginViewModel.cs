@@ -8,11 +8,11 @@ namespace TransportServicesApp.ViewModels
 {
     public class LoginViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Pole email jest wymagane")]
+        [EmailAddress(ErrorMessage = "Niepoprawny format email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Pole hasło jest wymagane")]
         [Display(Name = "Hasło")]
         [DataType(DataType.Password)]
         public string Password { get; set; }

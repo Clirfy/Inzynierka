@@ -30,3 +30,11 @@ C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\
 C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\TransportServicesApp.csproj.CopyComplete
 C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Account\Register.g.cshtml.cs
 C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Account\Login.g.cshtml.cs
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Administration\CreateRole.g.cshtml.cs
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Administration\ListRoles.g.cshtml.cs
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Administration\EditRole.g.cshtml.cs
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Administration\EditUsersInRole.g.cshtml.cs
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Account\AccessDenied.g.cshtml.cs
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Administration\ListUsers.g.cshtml.cs
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Administration\EditUser.g.cshtml.cs
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Shared\NotFound.g.cshtml.cs
