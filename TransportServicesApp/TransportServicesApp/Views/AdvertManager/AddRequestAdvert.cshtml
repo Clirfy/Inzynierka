@@ -1,0 +1,88 @@
+﻿@model TransportServicesApp.Models.Request
+
+@{
+    ViewData["Title"] = "AddRequestAdvert";
+}
+
+<h1>Nowa prośba przewozu</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddRequestAdvert">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CityFrom" class="control-label"></label>
+                <input asp-for="CityFrom" class="form-control" />
+                <span asp-validation-for="CityFrom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CityTo" class="control-label"></label>
+                <input asp-for="CityTo" class="form-control" />
+                <span asp-validation-for="CityTo" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                    <label asp-for="RequestType" class="control-label"></label>
+                    <input asp-for="RequestType" class="form-control" />
+                    <span asp-validation-for="RequestType" class="text-danger"></span>
+                </div>*@
+            <div class="form-group">
+                <label asp-for="RequestType" class="control-label"></label>
+                <select asp-for="RequestType" class="form-control">
+                    <option onclick="ChangeRequestType(false)">Pasażer</option>
+                    <option onclick="ChangeRequestType(true)">Towar</option>
+                </select>
+                <span asp-validation-for="RequestType" class="text-danger"></span>
+            </div>
+            
+            <div id="passenger">
+                <div class="form-group">
+                    <label id="passenger" asp-for="PassengerAmmount" class="control-label"></label>
+                    <input asp-for="PassengerAmmount" class="form-control" />
+                    <span asp-validation-for="PassengerAmmount" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="AdditionalBaggage" /> @Html.DisplayNameFor(model => model.AdditionalBaggage)
+                    </label>
+                </div>
+            </div>
+
+            <div id="cargo">
+                <div class="form-group">
+                    <label asp-for="Size" class="control-label"></label>
+                    <input asp-for="Size" class="form-control" />
+                    <span asp-validation-for="Size" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Weight" class="control-label"></label>
+                    <input asp-for="Weight" class="form-control" />
+                    <span asp-validation-for="Weight" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsFragile" /> @Html.DisplayNameFor(model => model.IsFragile)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts{
+    <script src="~/js/site.js"></script>
+}

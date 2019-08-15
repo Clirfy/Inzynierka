@@ -173,6 +173,41 @@ namespace TransportServicesApp.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("TransportServicesApp.Models.Request", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("AdditionalBaggage");
+
+                    b.Property<string>("CityFrom")
+                        .IsRequired();
+
+                    b.Property<string>("CityTo")
+                        .IsRequired();
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("IsFragile");
+
+                    b.Property<int>("PassengerAmmount");
+
+                    b.Property<string>("RequestType")
+                        .IsRequired();
+
+                    b.Property<string>("Size");
+
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("UserName");
+
+                    b.Property<string>("Weight");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Requests");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")

@@ -15,3 +15,18 @@ function confirmDelete(uniqueId, isDeleteClicked) {
         $('#' + confirmDeleteSpan).hide();
     }
 }
+
+
+// TODO fix js request type show swap script (AddRequestAdvert.cshtml)
+function ChangeRequestType(swapper) {
+    var passenger = 'passenger';
+    var cargo = 'cargo';
+
+    if (!swapper) {
+        $('#' + cargo).hide();
+        $('#' + passenger).show();
+    } else {
+        $('#' + passenger).hide();
+        $('#' + cargo).show();
+    }
+}

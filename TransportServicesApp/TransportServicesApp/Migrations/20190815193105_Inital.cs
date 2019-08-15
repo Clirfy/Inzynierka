@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TransportServicesApp.Migrations
 {
-    public partial class AddingIdentity : Migration
+    public partial class Inital : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,6 +44,28 @@ namespace TransportServicesApp.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Requests",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CityFrom = table.Column<string>(nullable: false),
+                    CityTo = table.Column<string>(nullable: false),
+                    RequestType = table.Column<string>(nullable: false),
+                    PassengerAmmount = table.Column<int>(nullable: false),
+                    AdditionalBaggage = table.Column<bool>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    Size = table.Column<string>(nullable: true),
+                    Weight = table.Column<string>(nullable: true),
+                    IsFragile = table.Column<bool>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
+                    UserName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Requests", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -206,6 +228,9 @@ namespace TransportServicesApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Requests");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

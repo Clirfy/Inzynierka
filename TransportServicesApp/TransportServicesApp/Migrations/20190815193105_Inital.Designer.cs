@@ -9,8 +9,8 @@ using TransportServicesApp.Models;
 namespace TransportServicesApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190813183602_AddingIdentity")]
-    partial class AddingIdentity
+    [Migration("20190815193105_Inital")]
+    partial class Inital
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -173,6 +173,41 @@ namespace TransportServicesApp.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("TransportServicesApp.Models.Request", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("AdditionalBaggage");
+
+                    b.Property<string>("CityFrom")
+                        .IsRequired();
+
+                    b.Property<string>("CityTo")
+                        .IsRequired();
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("IsFragile");
+
+                    b.Property<int>("PassengerAmmount");
+
+                    b.Property<string>("RequestType")
+                        .IsRequired();
+
+                    b.Property<string>("Size");
+
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("UserName");
+
+                    b.Property<string>("Weight");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Requests");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

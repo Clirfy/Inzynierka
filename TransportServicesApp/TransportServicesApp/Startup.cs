@@ -29,6 +29,10 @@ namespace TransportServicesApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Interfaces
+            services.AddScoped<IRequestRepository, SQLRequestRepository>();
+
+
             //SQLite provider
             services.AddDbContextPool<AppDbContext>(options => options.UseSqlite(Configuration["SqlConnection"]));
             
@@ -50,11 +54,7 @@ namespace TransportServicesApp
             });
 
 
-            services.AddMvc( options =>
-            {
-                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-                options.Filters.Add(new AuthorizeFilter(policy));
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

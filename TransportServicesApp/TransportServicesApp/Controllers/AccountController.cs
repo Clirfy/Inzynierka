@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using TransportServicesApp.Models;
 using TransportServicesApp.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -52,7 +53,7 @@ namespace TransportServicesApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Copy data from RegisterViewModel to IdentityUser
+                // Copy data from RegisterViewModel to ApplicationUser
                 var user = new IdentityUser
                 {
                     UserName = model.Email,
