@@ -17,16 +17,19 @@ function confirmDelete(uniqueId, isDeleteClicked) {
 }
 
 
-// TODO fix js request type show swap script (AddRequestAdvert.cshtml)
-function ChangeRequestType(swapper) {
+// eg: when cargo type checked - hide passenger options
+function ChangeAdvertType(swapper) {
     var passenger = 'passenger';
     var cargo = 'cargo';
 
-    if (!swapper) {
+    if (swapper == 1) {
         $('#' + cargo).hide();
         $('#' + passenger).show();
-    } else {
+    } else if (swapper == 2) {
         $('#' + passenger).hide();
+        $('#' + cargo).show();
+    } else {
+        $('#' + passenger).show();
         $('#' + cargo).show();
     }
 }

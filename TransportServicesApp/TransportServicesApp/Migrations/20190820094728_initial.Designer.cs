@@ -9,8 +9,8 @@ using TransportServicesApp.Models;
 namespace TransportServicesApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190815193105_Inital")]
-    partial class Inital
+    [Migration("20190820094728_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -175,6 +175,38 @@ namespace TransportServicesApp.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("TransportServicesApp.Models.Passage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("AdditionalBaggage");
+
+                    b.Property<string>("CityFrom")
+                        .IsRequired();
+
+                    b.Property<string>("CityTo")
+                        .IsRequired();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("MaxSize");
+
+                    b.Property<int>("MaxWeight");
+
+                    b.Property<string>("PassageType");
+
+                    b.Property<int>("PassengerLimit");
+
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Passages");
+                });
+
             modelBuilder.Entity("TransportServicesApp.Models.Request", b =>
                 {
                     b.Property<Guid>("Id")
@@ -194,8 +226,7 @@ namespace TransportServicesApp.Migrations
 
                     b.Property<int>("PassengerAmmount");
 
-                    b.Property<string>("RequestType")
-                        .IsRequired();
+                    b.Property<string>("RequestType");
 
                     b.Property<string>("Size");
 
@@ -203,7 +234,7 @@ namespace TransportServicesApp.Migrations
 
                     b.Property<string>("UserName");
 
-                    b.Property<string>("Weight");
+                    b.Property<int>("Weight");
 
                     b.HasKey("Id");
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TransportServicesApp.Models
 {
-    public class Request
+    public class Passage
     {
         public Guid Id { get; set; }
 
@@ -16,29 +16,26 @@ namespace TransportServicesApp.Models
         [Required]
         public string CityTo { get; set; }
 
-        public string RequestType { get; set; }
+        public string PassageType { get; set; }
 
 
         //details
-        public int PassengerAmmount { get; set; }
+        public int PassengerLimit { get; set; }
 
+        // has space for additional baggage
         public bool AdditionalBaggage { get; set; }
 
         public string Description { get; set; }
 
-        public string Size { get; set; }
+        public string MaxSize { get; set; }
 
-        //TODO weight w stringu bo w incie ma validacje że nie może być puste pole gdy wybierasz transport pasażer
-        public int Weight { get; set; }
+        public int MaxWeight { get; set; }
 
-        public bool IsFragile { get; set; }
 
 
         //UserData
         public string UserId { get; set; }
 
         public string UserName { get; set; }
-
     }
-
 }

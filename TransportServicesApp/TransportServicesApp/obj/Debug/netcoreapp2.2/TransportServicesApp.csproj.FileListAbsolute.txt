@@ -40,4 +40,5 @@ C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\
 C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Shared\NotFound.g.cshtml.cs
 C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\AdvertManager\Index.g.cshtml.cs
 C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\AdvertManager\AddRequestAdvert.g.cshtml.cs
-C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\AdvertManager\UserAdverts.g.cshtml.cs
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\AdvertManager\UserRequestAdverts.g.cshtml.cs
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\AdvertManager\AddPassageAdvert.g.cshtml.cs

@@ -31,6 +31,7 @@ namespace TransportServicesApp
         {
             //Interfaces
             services.AddScoped<IRequestRepository, SQLRequestRepository>();
+            services.AddScoped<IPassageRepository, SQLPassageRespository>();
 
 
             //SQLite provider

@@ -16,6 +16,7 @@ namespace TransportServicesApp.Models
         }
 
         public DbSet<Request> Requests { get; set; }
+        public DbSet<Passage> Passages { get; set; }
 
     }
 }
