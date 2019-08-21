@@ -46,12 +46,12 @@
                                     </a>
                                     <div class="dropdown-content">
                                         <a asp-controller="AdvertManager"
-                                           asp-action="Index">Moje Ogłoszenia</a>
+                                           asp-action="UserAdverts">Moje Ogłoszenia</a>
                                         <div class="dropdown-divider"></div>
                                         <a asp-controller="AdvertManager"
                                            asp-action="AddRequestAdvert">Nowa Prośba</a>
                                         <a class="dropdown-item" asp-controller="AdvertManager"
-                                           asp-action="AddPassageAdvert">Nowe Ogłoszenie</a>
+                                           asp-action="AddPassageAdvert">Nowa Oferta</a>
                                     </div>
                                 </div>
                             </li>
@@ -64,8 +64,8 @@
                                         <i class="fas fa-edit"></i> Zarządzaj
                                     </a>
                                     <div class="dropdown-content">
-                                        <a asp-controller="AdvertManager"
-                                           asp-action="AddRequestAdvert">Użytkownicy</a>
+                                        <a asp-controller="Administration"
+                                           asp-action="ListUsers">Użytkownicy</a>
                                         <a class="dropdown-item" asp-controller="Administration"
                                            asp-action="ListRoles">Role</a>
                                     </div>
@@ -109,7 +109,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" style="background-color: #e8f2f8">
         <div class="container">
             &copy; 2019 - TransportServicesApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

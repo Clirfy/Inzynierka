@@ -30,8 +30,7 @@ namespace TransportServicesApp
         public void ConfigureServices(IServiceCollection services)
         {
             //Interfaces
-            services.AddScoped<IRequestRepository, SQLRequestRepository>();
-            services.AddScoped<IPassageRepository, SQLPassageRespository>();
+            services.AddScoped<IAdvertRepository, SQLAdvertRespository>();
 
 
             //SQLite provider

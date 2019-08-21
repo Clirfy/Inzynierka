@@ -9,7 +9,7 @@ using TransportServicesApp.Models;
 namespace TransportServicesApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190820094728_initial")]
+    [Migration("20190821105446_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -175,44 +175,14 @@ namespace TransportServicesApp.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("TransportServicesApp.Models.Passage", b =>
+            modelBuilder.Entity("TransportServicesApp.Models.Advert", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("AdditionalBaggage");
 
-                    b.Property<string>("CityFrom")
-                        .IsRequired();
-
-                    b.Property<string>("CityTo")
-                        .IsRequired();
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("MaxSize");
-
-                    b.Property<int>("MaxWeight");
-
-                    b.Property<string>("PassageType");
-
-                    b.Property<int>("PassengerLimit");
-
-                    b.Property<string>("UserId");
-
-                    b.Property<string>("UserName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Passages");
-                });
-
-            modelBuilder.Entity("TransportServicesApp.Models.Request", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("AdditionalBaggage");
+                    b.Property<string>("AdvertType");
 
                     b.Property<string>("CityFrom")
                         .IsRequired();
@@ -224,9 +194,17 @@ namespace TransportServicesApp.Migrations
 
                     b.Property<bool>("IsFragile");
 
-                    b.Property<int>("PassengerAmmount");
+                    b.Property<string>("MaxSize");
 
-                    b.Property<string>("RequestType");
+                    b.Property<string>("MaxWeight");
+
+                    b.Property<int>("PassageType");
+
+                    b.Property<string>("PassengerAmmount");
+
+                    b.Property<string>("PassengerLimit");
+
+                    b.Property<int>("RequestType");
 
                     b.Property<string>("Size");
 
@@ -234,11 +212,11 @@ namespace TransportServicesApp.Migrations
 
                     b.Property<string>("UserName");
 
-                    b.Property<int>("Weight");
+                    b.Property<string>("Weight");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Requests");
+                    b.ToTable("Adverts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

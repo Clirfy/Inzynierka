@@ -3,6 +3,7 @@
 
 // Write your JavaScript code.
 
+// show/ hide delete confirmation buttons
 function confirmDelete(uniqueId, isDeleteClicked) {
     var deleteSpan = 'deleteSpan_' + uniqueId;
     var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
@@ -17,7 +18,7 @@ function confirmDelete(uniqueId, isDeleteClicked) {
 }
 
 
-// eg: when cargo type checked - hide passenger options
+// for egzample: when cargo type checked - hide passenger options
 function ChangeAdvertType(swapper) {
     var passenger = 'passenger';
     var cargo = 'cargo';
@@ -25,11 +26,14 @@ function ChangeAdvertType(swapper) {
     if (swapper == 1) {
         $('#' + cargo).hide();
         $('#' + passenger).show();
+        $('#passengerRadio').attr("checked", true);
     } else if (swapper == 2) {
         $('#' + passenger).hide();
         $('#' + cargo).show();
+        $('#cargoRadio').prop("checked", true);
     } else {
         $('#' + passenger).show();
         $('#' + cargo).show();
+        $('#customRadio').prop("checked", true);
     }
 }

@@ -8,6 +8,33 @@ namespace TransportServicesApp.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Adverts",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CityFrom = table.Column<string>(nullable: false),
+                    CityTo = table.Column<string>(nullable: false),
+                    RequestType = table.Column<int>(nullable: false),
+                    PassengerAmmount = table.Column<string>(nullable: true),
+                    Size = table.Column<string>(nullable: true),
+                    Weight = table.Column<string>(nullable: true),
+                    IsFragile = table.Column<bool>(nullable: false),
+                    AdditionalBaggage = table.Column<bool>(nullable: false),
+                    PassageType = table.Column<int>(nullable: false),
+                    PassengerLimit = table.Column<string>(nullable: true),
+                    MaxSize = table.Column<string>(nullable: true),
+                    MaxWeight = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
+                    UserName = table.Column<string>(nullable: true),
+                    AdvertType = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Adverts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -44,49 +71,6 @@ namespace TransportServicesApp.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Passages",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    CityFrom = table.Column<string>(nullable: false),
-                    CityTo = table.Column<string>(nullable: false),
-                    PassageType = table.Column<string>(nullable: true),
-                    PassengerLimit = table.Column<int>(nullable: false),
-                    AdditionalBaggage = table.Column<bool>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    MaxSize = table.Column<string>(nullable: true),
-                    MaxWeight = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
-                    UserName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Passages", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Requests",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    CityFrom = table.Column<string>(nullable: false),
-                    CityTo = table.Column<string>(nullable: false),
-                    RequestType = table.Column<string>(nullable: true),
-                    PassengerAmmount = table.Column<int>(nullable: false),
-                    AdditionalBaggage = table.Column<bool>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    Size = table.Column<string>(nullable: true),
-                    Weight = table.Column<int>(nullable: false),
-                    IsFragile = table.Column<bool>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
-                    UserName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Requests", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -236,6 +220,9 @@ namespace TransportServicesApp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Adverts");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -249,12 +236,6 @@ namespace TransportServicesApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "Passages");
-
-            migrationBuilder.DropTable(
-                name: "Requests");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

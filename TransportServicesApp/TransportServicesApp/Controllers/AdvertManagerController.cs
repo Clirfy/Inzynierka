@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TransportServicesApp.Models;
 
@@ -13,30 +12,26 @@ namespace TransportServicesApp.Controllers
 {
     public class AdvertManagerController : Controller
     {
-        private readonly IRequestRepository requestRepository;
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
-        private readonly IPassageRepository passageRepository;
+        private readonly IAdvertRepository advertRepository;
+        private readonly AppDbContext dbContext;
 
-        public AdvertManagerController(IRequestRepository requestRepository, UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager, IPassageRepository passageRepository)
+        public AdvertManagerController(IAdvertRepository advertRepository, AppDbContext dbContext)
         {
-            this.requestRepository = requestRepository;
-            this.userManager = userManager;
-            this.signInManager = signInManager;
-            this.passageRepository = passageRepository;
+            this.advertRepository = advertRepository;
+            this.dbContext = dbContext;
         }
-        //TODO ViewModel for both requests and passages in order to display 
-        public ViewResult Index()
+
+
+        public ViewResult UserAdverts()
         {
-            var model = requestRepository.GetAllRequests();
+            var id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var model = advertRepository.GetUserAdverts(id);
             return View(model);
         }
 
 
 
-        // ----------------Request Advert--------------------
-
+        //---------------Add Request---------------
 
         [HttpGet]
         public IActionResult AddRequestAdvert()
@@ -45,31 +40,24 @@ namespace TransportServicesApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddRequestAdvert(Request model)
+        public IActionResult AddRequestAdvert(Advert model)
         {
             if (ModelState.IsValid)
             {
                 model.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 model.UserName = User.FindFirst(ClaimTypes.Name).Value;
-                requestRepository.AddRequest(model);
+                model.AdvertType = "Prośba";
+                advertRepository.AddAdvert(model);
+
+                return RedirectToAction("UserAdverts");
             }
 
             return View();
         }
 
-        //TODO create href/anchor in navbar for useradverts
-        [HttpGet]
-        public IActionResult UserRequestAdverts()
-        {
-            var id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var advert = requestRepository.GetUserRequests(id);
-
-            return View(advert);
-        }
 
 
-
-        // ----------------Passage Advert--------------------
+        //---------------Add Passage---------------
 
         [HttpGet]
         public IActionResult AddPassageAdvert()
@@ -78,25 +66,47 @@ namespace TransportServicesApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddPassageAdvert(Passage model)
+        public IActionResult AddPassageAdvert(Advert model)
         {
             if (ModelState.IsValid)
             {
                 model.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 model.UserName = User.FindFirst(ClaimTypes.Name).Value;
-                passageRepository.AddPassage(model);
+                model.AdvertType = "Oferta";
+                advertRepository.AddAdvert(model);
+
+                return RedirectToAction("UserAdverts");
             }
 
             return View();
         }
 
-        [HttpGet]
-        public IActionResult UserPassageAdverts()
-        {
-            var id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var advert = passageRepository.GetUserPassages(id);
 
+
+        [HttpPost]
+        public IActionResult DeleteAdvert(string id)
+        {
+            advertRepository.DeleteAdvert(id);
+            return RedirectToAction("UserAdverts");
+        }
+
+        [HttpGet]
+        public IActionResult EditAdvert(string id)
+        {
+            var advert = advertRepository.GetAdvert(id);
             return View(advert);
+        }
+
+        [HttpPost]
+        public IActionResult EditAdvert(Advert model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                advertRepository.UpdateAdvert(model);
+                return RedirectToAction("UserAdverts");
+            }
+            return View();
         }
     }
 }
