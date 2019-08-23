@@ -7,6 +7,7 @@ namespace TransportServicesApp.Models
 {
     public interface IAdvertRepository
     {
+        // AdvertManagerController
         Advert AddAdvert(Advert advert);
 
         IEnumerable<Advert> GetAllAdverts();
@@ -18,5 +19,9 @@ namespace TransportServicesApp.Models
         Advert DeleteAdvert(string advertId);
 
         Advert UpdateAdvert(Advert advertChanges);
+
+
+        //AdvertController
+        IEnumerable<Advert> GetAdvertSearch(string advertType, string cityFrom, string cityTo);
     }
 }

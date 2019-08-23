@@ -6,9 +6,16 @@
 
 <h1>UserAdverts</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="card-body text-center">
+    <a class="btn btn-primary" style="width:auto"
+       asp-controller="AdvertManager" asp-action="AddRequestAdvert">
+        Dodaj nową prośbę
+    </a>
+    <a class="btn btn-primary" style="width:auto"
+       asp-controller="AdvertManager" asp-action="AddPassageAdvert">
+        Dodaj nową ofertę
+    </a>
+</div>
 
 @if (Model.Any())
 {
@@ -147,12 +154,12 @@
                     <span id="confirmDeleteSpan_@advert.Id" style="display:none">
                         <span>Czy na pewno chcesz usunąć?</span>
                         <button type="submit" class="btn btn-danger">Tak</button>
-                        <a href="#" class="btn btn-primary"
+                        <a class="btn btn-primary"
                            onclick="confirmDelete('@advert.Id', false)">Nie</a>
                     </span>
 
                     <span id="deleteSpan_@advert.Id">
-                        <a href="#" class="btn btn-danger"
+                        <a class="btn btn-danger"
                            onclick="confirmDelete('@advert.Id', true)">Usuń</a>
                     </span>
                 </form>

@@ -90,6 +90,7 @@ namespace TransportServicesApp.Controllers
             return RedirectToAction("UserAdverts");
         }
 
+
         [HttpGet]
         public IActionResult EditAdvert(string id)
         {
