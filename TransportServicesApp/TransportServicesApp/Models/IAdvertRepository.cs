@@ -22,6 +22,7 @@ namespace TransportServicesApp.Models
 
 
         //AdvertController
-        IEnumerable<Advert> GetAdvertSearch(string advertType, string cityFrom, string cityTo);
+        IEnumerable<Advert> GetSearchResults(string advertType, string cityFrom, string cityTo);
+        IEnumerable<Advert> GetSearchResults(string cityFrom, string cityTo);
     }
 }

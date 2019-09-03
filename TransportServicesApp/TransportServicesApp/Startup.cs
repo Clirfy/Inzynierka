@@ -37,7 +37,7 @@ namespace TransportServicesApp
             services.AddDbContextPool<AppDbContext>(options => options.UseSqlite(Configuration["SqlConnection"]));
             
             //Identity service
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.Password.RequiredLength = 1;
                 options.Password.RequireNonAlphanumeric = false;

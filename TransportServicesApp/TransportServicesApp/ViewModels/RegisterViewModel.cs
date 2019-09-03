@@ -9,6 +9,10 @@ namespace TransportServicesApp.ViewModels
 {
     public class RegisterViewModel
     {
+        //[Required]
+        //[Remote(action: "IsUserNameInUseAsync", controller: "Account")]
+        //public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Remote(action: "IsEmailInUseAsync", controller: "Account")]

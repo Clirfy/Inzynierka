@@ -1,0 +1,42 @@
+﻿@model TransportServicesApp.ViewModels.EditUserAccountViewModel
+
+@{
+    ViewData["Title"] = "EditUserAsync";
+}
+
+<h1>EditUserAsync</h1>
+
+<h4>EditUserAccountViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @{
+                    var imgSrc = String.Format("data:image/gif;base64,{0}", Model.Image);
+                }
+                <img src="@imgSrc" style="height:100px; width:100px" />
+                <input type="file" asp-for="Image" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Zapisz" class="btn btn-info" />
+            </div>
+            <div>
+                <a asp-action="Index">Wróć do listy</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

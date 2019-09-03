@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TransportServicesApp.Models;
@@ -11,10 +12,12 @@ namespace TransportServicesApp.Controllers
     public class SearchController : Controller
     {
         private readonly AppDbContext dbContext;
+        private readonly IAdvertRepository advertRepository;
 
-        public SearchController(AppDbContext dbContext)
+        public SearchController(AppDbContext dbContext, IAdvertRepository advertRepository)
         {
             this.dbContext = dbContext;
+            this.advertRepository = advertRepository;
         }
 
         [HttpGet]
@@ -40,24 +43,20 @@ namespace TransportServicesApp.Controllers
         }
 
 
-
+        // TODO avatar przypisuje się do oferty przez co przy zmianie avatara w ofercie nie zmieni się
+        // AdvertManagerController/AddRequestAdvert + AddPassageAdvert
         [HttpGet]
         public IActionResult SearchResult(string cityFrom, string cityTo, string advertType)
         {
-            if(advertType == "All")
+            if (advertType == "All")
             {
-                var adverts = dbContext.Adverts
-                .Where(n => n.CityFrom.ToLower() == cityFrom.ToLower())
-                .Where(n => n.CityTo.ToLower() == cityTo.ToLower());
+                var adverts = advertRepository.GetSearchResults(cityFrom, cityTo);
 
                 return View(adverts);
             }
             else
             {
-                var adverts = dbContext.Adverts
-                .Where(n => n.CityFrom.ToLower() == cityFrom.ToLower())
-                .Where(n => n.CityTo.ToLower() == cityTo.ToLower())
-                .Where(n => n.AdvertType.ToLower() == advertType.ToLower());
+                var adverts = advertRepository.GetSearchResults(advertType, cityFrom, cityTo);
 
                 return View(adverts);
             }
@@ -89,6 +88,8 @@ namespace TransportServicesApp.Controllers
 
             return Json(city);
         }
+        //-----------------^^JQuery autocomplete actions^^------------------
+
     }
 
 }

@@ -47,6 +47,13 @@ namespace TransportServicesApp.Controllers
                 model.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 model.UserName = User.FindFirst(ClaimTypes.Name).Value;
                 model.AdvertType = "Prośba";
+                foreach (var item in dbContext.Users)
+                {
+                    if (item.Id == model.UserId)
+                    {
+                        model.UserImage = item.Image;
+                    }
+                }
                 advertRepository.AddAdvert(model);
 
                 return RedirectToAction("UserAdverts");
@@ -73,6 +80,13 @@ namespace TransportServicesApp.Controllers
                 model.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 model.UserName = User.FindFirst(ClaimTypes.Name).Value;
                 model.AdvertType = "Oferta";
+                foreach (var item in dbContext.Users)
+                {
+                    if (item.Id == model.UserId)
+                    {
+                        model.UserImage = item.Image;
+                    }
+                }
                 advertRepository.AddAdvert(model);
 
                 return RedirectToAction("UserAdverts");

@@ -37,16 +37,24 @@ namespace TransportServicesApp.Models
             return dbContext.Adverts.Find(Id);
         }
 
-        public IEnumerable<Advert> GetAdvertSearch(string advertType, string cityFrom, string cityTo)
+        public IEnumerable<Advert> GetAllAdverts()
         {
-            return dbContext.Adverts.Where(n => n.AdvertType == advertType)
+            return dbContext.Adverts;
+        }
+
+        public IEnumerable<Advert> GetSearchResults(string advertType, string cityFrom, string cityTo)
+        {
+            return dbContext.Adverts
+                .Where(n => n.AdvertType == advertType)
                 .Where(n => n.CityFrom == cityFrom)
                 .Where(n => n.CityTo == cityTo);
         }
 
-        public IEnumerable<Advert> GetAllAdverts()
+        public IEnumerable<Advert> GetSearchResults(string cityFrom, string cityTo)
         {
-            return dbContext.Adverts;
+            return dbContext.Adverts
+                .Where(n => n.CityFrom == cityFrom)
+                .Where(n => n.CityTo == cityTo);
         }
 
         public IEnumerable<Advert> GetUserAdverts(string userId)

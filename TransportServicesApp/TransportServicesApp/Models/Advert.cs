@@ -57,6 +57,8 @@ namespace TransportServicesApp.Models
 
         public string UserName { get; set; }
 
+        public string UserImage { get; set; }
+
 
         public string AdvertType { get; set; }
     }
