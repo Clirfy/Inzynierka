@@ -1,0 +1,306 @@
+﻿@model IEnumerable<TransportServicesApp.Models.Advert>
+
+@{
+    ViewData["Title"] = "SearchResult";
+}
+
+<h1>SearchResult</h1>
+
+
+
+@if (Model.Any())
+{
+    foreach (var advert in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-8">
+                        <span class="text-black-50">@advert.AdvertType</span>
+                        <span> transportu z </span>
+                        <span class="text-black-50">@advert.CityFrom</span>
+                        <span> do </span>
+                        <span class="text-black-50">@advert.CityTo</span>
+                    </div>
+
+                    <div class="col-md-4 text-right">
+                        @{
+                            var imgSrc = String.Format("data:image/gif;base64,{0}", advert.UserImage);
+                        }
+                        <span>@advert.UserName</span>
+                        <img src="@imgSrc" style="height:80px; width:80px" />
+                    </div>
+                </div>
+            </div>
+            @if (advert.AdvertType == "Prośba")
+            {
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Rodzaj Transportu:</label>
+                            @if (advert.RequestType == 1)
+                            {
+                                <h6 class="text-black-50">Przejazd Pasażerski</h6>
+                            }
+                            else if (advert.RequestType == 2)
+                            {
+                                <h6 class="text-black-50">Przewóz Towaru</h6>
+                            }
+                            else
+                            {
+                                <h6 class="text-black-50">Niezdefiniowany</h6>
+                            }
+                        </div>
+                        @if (advert.RequestType == 1 || advert.RequestType == 0)
+                        {
+                            <div class="col-md-3">
+                                <label>Ilość Pasażerów:</label>
+                                <h6 class="text-black-50">@advert.PassengerAmmount</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Dodatkowy Bagaż:</label>
+                                @if (advert.AdditionalBaggage)
+                                {
+                                    <h6 class="text-black-50">Tak</h6>
+                                }
+                                else
+                                {
+                                    <h6 class="text-black-50">Nie</h6>
+                                }
+                            </div>
+                        }
+                        @if (advert.RequestType == 2 || advert.RequestType == 0)
+                        {
+                            <div class="col-md-3">
+                                <label>Rozmiary:</label>
+                                <h6 class="text-black-50">@advert.Size</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Waga:</label>
+                                <h6 class="text-black-50">@advert.Weight Kg</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Towar delikatny:</label>
+                                @if (advert.IsFragile)
+                                {
+                                    <h6 class="text-black-50">Tak</h6>
+                                }
+                                else
+                                {
+                                    <h6 class="text-black-50">Nie</h6>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            @if (advert.AdvertType == "Oferta")
+            {
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Rodzaj Transportu:</label>
+                            @if (advert.PassageType == 1)
+                            {
+                                <h6 class="text-black-50">Przejazd Pasażerski</h6>
+                            }
+                            else if (advert.PassageType == 2)
+                            {
+                                <h6 class="text-black-50">Przewóz Towaru</h6>
+                            }
+                            else
+                            {
+                                <h6 class="text-black-50">Niezdefiniowany</h6>
+                            }
+                        </div>
+                        @if (advert.PassageType == 1 || advert.PassageType == 0)
+                        {
+                            <div class="col-md-3">
+                                <label>Limit Pasażerów:</label>
+                                <h6 class="text-black-50">@advert.PassengerLimit</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Miejsce Na Dodatkowy Bagaż:</label>
+                                @if (advert.AdditionalBaggage == true)
+                                {
+                                    <h6 class="text-black-50">Tak</h6>
+                                }
+                                else
+                                {
+                                    <h6 class="text-black-50">Nie</h6>
+                                }
+                            </div>
+                        }
+                        @if (advert.PassageType == 2 || advert.PassageType == 0)
+                        {
+                            <div class="col-md-3">
+                                <label>Max. Rozmiary:</label>
+                                <h6 class="text-black-50">@advert.MaxSize</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Max. Waga:</label>
+                                <h6 class="text-black-50">@advert.MaxWeight</h6>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+
+            <div class="card-footer">
+                <form method="post" asp-action="DeleteAdvert" asp-route-id="@advert.Id">
+                    <a asp-controller="Advertmanager" asp-action="EditAdvert"
+                       asp-route-id="@advert.Id" class="btn btn-primary">Edytuj</a>
+
+                    <span id="confirmDeleteSpan_@advert.Id" style="display:none">
+                        <span>Czy na pewno chcesz usunąć?</span>
+                        <button type="submit" class="btn btn-danger">Tak</button>
+                        <a class="btn btn-primary"
+                           onclick="confirmDelete('@advert.Id', false)">Nie</a>
+                    </span>
+
+                    <span id="deleteSpan_@advert.Id">
+                        <a class="btn btn-danger"
+                           onclick="confirmDelete('@advert.Id', true)">Usuń</a>
+                    </span>
+                </form>
+            </div>
+        </div>
+    }
+}
+
+
+@* ----------------------------------------------------------------------------------- *@
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CityFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CityTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequestType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassengerAmmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsFragile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdditionalBaggage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassageType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassengerLimit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxWeight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdvertType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CityFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CityTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequestType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PassengerAmmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Size)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsFragile)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdditionalBaggage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PassageType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PassengerLimit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaxSize)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaxWeight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @{
+                        var imgSrc = String.Format("data:image/gif;base64,{0}", item.UserImage);
+                    }
+                    <img src="@imgSrc" style="height:100px; width:100px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdvertType)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

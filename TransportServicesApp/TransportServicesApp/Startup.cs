@@ -31,10 +31,15 @@ namespace TransportServicesApp
         {
             //Interfaces
             services.AddScoped<IAdvertRepository, SQLAdvertRespository>();
+            services.AddScoped<IOfferRepository, SQLOfferRepository>();
+            services.AddScoped<IRequestRepository, SQLRequestRepository>();
 
 
             //SQLite provider
-            services.AddDbContextPool<AppDbContext>(options => options.UseSqlite(Configuration["SqlConnection"]));
+            //services.AddDbContextPool<AppDbContext>(options => options.UseSqlite(Configuration["SqlConnection"]));
+
+            //SQL Server Manager provider
+            services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DBConnection")));
             
             //Identity service
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>

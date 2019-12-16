@@ -1,4 +1,4 @@
-﻿@model TransportServicesApp.Models.Advert
+﻿@model Offer
 
 @{
     ViewData["Title"] = "AddPassageAdvert";
@@ -29,18 +29,18 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <label asp-for="PassageType" class="control-label">Rodzaj Oferty</label>
+                    <label asp-for="OfferType" class="control-label">Rodzaj Oferty</label>
                     <div class="form-group">
                         <div class="form-check form-check-inline">
-                            <input asp-for="PassageType" class="form-check-input" type="radio" id="passengerRadio" value="1" onclick="ChangeAdvertType(1)">
+                            <input asp-for="OfferType" class="form-check-input" type="radio" id="passengerRadio" value="1" onclick="ChangeAdvertType(1)">
                             <label class="form-check-label" for="passengerRadio">Pasażer</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input asp-for="PassageType" class="form-check-input" type="radio" id="cargoRadio" value="2" onclick="ChangeAdvertType(2)">
+                            <input asp-for="OfferType" class="form-check-input" type="radio" id="cargoRadio" value="2" onclick="ChangeAdvertType(2)">
                             <label class="form-check-label" for="cargoRadio">Towar</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input asp-for="PassageType" class="form-check-input" type="radio" id="customRadio" value="0" onclick="ChangeAdvertType(0)" checked>
+                            <input asp-for="OfferType" class="form-check-input" type="radio" id="customRadio" value="0" onclick="ChangeAdvertType(0)" checked>
                             <label class="form-check-label" for="customRadio">Niestandardowy</label>
                         </div>
                     </div>

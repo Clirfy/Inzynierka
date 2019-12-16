@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TransportServicesApp.Models;
 
@@ -14,7 +15,9 @@ namespace TransportServicesApp.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -34,7 +37,8 @@ namespace TransportServicesApp.Migrations
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex");
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -42,7 +46,8 @@ namespace TransportServicesApp.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType");
 
@@ -61,7 +66,8 @@ namespace TransportServicesApp.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType");
 
@@ -218,9 +224,80 @@ namespace TransportServicesApp.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex");
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("TransportServicesApp.Models.Offer", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("AdditionalBaggage");
+
+                    b.Property<string>("AdvertType");
+
+                    b.Property<string>("CityFrom");
+
+                    b.Property<string>("CityTo");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("MaxSize");
+
+                    b.Property<string>("MaxWeight");
+
+                    b.Property<string>("OfferType");
+
+                    b.Property<int>("PassengerLimit");
+
+                    b.Property<string>("UserID");
+
+                    b.Property<string>("UserImage");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Offers");
+                });
+
+            modelBuilder.Entity("TransportServicesApp.Models.Request", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("AdditionalBaggage");
+
+                    b.Property<string>("AdvertType");
+
+                    b.Property<string>("CityFrom");
+
+                    b.Property<string>("CityTo");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("IsFragile");
+
+                    b.Property<int>("PassengerAmmount");
+
+                    b.Property<string>("RequestType");
+
+                    b.Property<string>("Size");
+
+                    b.Property<string>("UserID");
+
+                    b.Property<string>("UserImage");
+
+                    b.Property<string>("UserName");
+
+                    b.Property<string>("Weight");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Requests");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

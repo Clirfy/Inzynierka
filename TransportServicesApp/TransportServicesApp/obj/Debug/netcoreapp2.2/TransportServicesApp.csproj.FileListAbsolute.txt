@@ -43,6 +43,7 @@ C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\
 C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\AdvertManager\AddPassageAdvert.g.cshtml.cs
 C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\AdvertManager\UserAdverts.g.cshtml.cs
 C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\AdvertManager\EditAdvert.g.cshtml.cs
-C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Search\SearchResult.g.cshtml.cs
 C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Search\Index.g.cshtml.cs
 C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Account\EditUserAsync.g.cshtml.cs
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Search\SearchResultold.g.cshtml.cs
+C:\Users\Wojas\Desktop\Inzynierka\TransportServicesApp\TransportServicesApp\obj\Debug\netcoreapp2.2\Razor\Views\Search\SearchResult.g.cshtml.cs

@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TransportServicesApp.Models;
+using TransportServicesApp.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,22 +15,62 @@ namespace TransportServicesApp.Controllers
     {
         private readonly IAdvertRepository advertRepository;
         private readonly AppDbContext dbContext;
+        private readonly IRequestRepository requestRepository;
+        private readonly IOfferRepository offerRepository;
 
-        public AdvertManagerController(IAdvertRepository advertRepository, AppDbContext dbContext)
+        public AdvertManagerController(IAdvertRepository advertRepository, AppDbContext dbContext,
+            IRequestRepository requestRepository, IOfferRepository offerRepository)
         {
             this.advertRepository = advertRepository;
             this.dbContext = dbContext;
+            this.requestRepository = requestRepository;
+            this.offerRepository = offerRepository;
         }
 
-
-        public ViewResult UserAdverts()
+        public ViewResult UserAdverts(List<UserAdvertsViewModel> model)
         {
             var id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var model = advertRepository.GetUserAdverts(id);
+            var requests = requestRepository.GetUserRequests(id);
+            var offers = offerRepository.GetUserOffers(id);
+
+            foreach (var item in requests)
+            {
+                var userAdvertsViewModel = new UserAdvertsViewModel
+                {
+                    Id = item.Id,
+                    AdditionalBaggage = item.AdditionalBaggage,
+                    CityFrom = item.CityFrom,
+                    CityTo = item.CityTo,
+                    Description = item.Description,
+                    Size = item.Size,
+                    Weight = item.Weight,
+                    PassengerAmmount = item.PassengerAmmount,
+                    AdvertType = item.AdvertType,
+                    IsFragile = item.IsFragile,
+                    RequestType = item.RequestType
+                };
+                model.Add(userAdvertsViewModel);
+            }
+            foreach (var item in offers)
+            {
+                var userAdvertsViewModel = new UserAdvertsViewModel
+                {
+                    Id = item.Id,
+                    AdditionalBaggage = item.AdditionalBaggage,
+                    CityFrom = item.CityFrom,
+                    CityTo = item.CityTo,
+                    Description = item.Description,
+                    MaxSize = item.MaxSize,
+                    MaxWeight = item.MaxWeight,
+                    PassengerLimit = item.PassengerLimit,
+                    AdvertType = item.AdvertType,
+                    OfferType = item.OfferType
+                };
+                model.Add(userAdvertsViewModel);
+            }
+
             return View(model);
         }
-
-
 
         //---------------Add Request---------------
 
@@ -40,28 +81,41 @@ namespace TransportServicesApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddRequestAdvert(Advert model)
+        public IActionResult AddRequestAdvert(Request model)
         {
             if (ModelState.IsValid)
             {
-                model.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                model.UserID = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 model.UserName = User.FindFirst(ClaimTypes.Name).Value;
                 model.AdvertType = "Prośba";
-                foreach (var item in dbContext.Users)
-                {
-                    if (item.Id == model.UserId)
-                    {
-                        model.UserImage = item.Image;
-                    }
-                }
-                advertRepository.AddAdvert(model);
-
+                requestRepository.AddRequest(model);
                 return RedirectToAction("UserAdverts");
             }
 
             return View();
         }
+        //[HttpPost]
+        //public IActionResult AddRequestAdvert(Advert model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        model.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        //        model.UserName = User.FindFirst(ClaimTypes.Name).Value;
+        //        model.AdvertType = "Prośba";
+        //        foreach (var item in dbContext.Users)
+        //        {
+        //            if (item.Id == model.UserId)
+        //            {
+        //                model.UserImage = item.Image;
+        //            }
+        //        }
+        //        advertRepository.AddAdvert(model);
 
+        //        return RedirectToAction("UserAdverts");
+        //    }
+
+        //    return View();
+        //}
 
 
         //---------------Add Passage---------------
@@ -73,26 +127,36 @@ namespace TransportServicesApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddPassageAdvert(Advert model)
+        public IActionResult AddPassageAdvert(Offer model)
         {
             if (ModelState.IsValid)
             {
-                model.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                model.UserID = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 model.UserName = User.FindFirst(ClaimTypes.Name).Value;
                 model.AdvertType = "Oferta";
-                foreach (var item in dbContext.Users)
-                {
-                    if (item.Id == model.UserId)
-                    {
-                        model.UserImage = item.Image;
-                    }
-                }
-                advertRepository.AddAdvert(model);
-
+                offerRepository.AddOffer(model);
                 return RedirectToAction("UserAdverts");
             }
 
             return View();
+            //if (ModelState.IsValid)
+            //{
+            //    model.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            //    model.UserName = User.FindFirst(ClaimTypes.Name).Value;
+            //    model.AdvertType = "Oferta";
+            //    foreach (var item in dbContext.Users)
+            //    {
+            //        if (item.Id == model.UserId)
+            //        {
+            //            model.UserImage = item.Image;
+            //        }
+            //    }
+            //    advertRepository.AddAdvert(model);
+
+            //    return RedirectToAction("UserAdverts");
+            //}
+
+            //return View();
         }
 
 
@@ -100,25 +164,69 @@ namespace TransportServicesApp.Controllers
         [HttpPost]
         public IActionResult DeleteAdvert(string id)
         {
-            advertRepository.DeleteAdvert(id);
+            if(requestRepository.GetRequest(id) != null)
+            {
+                requestRepository.DeleteRequest(id);
+            }
+            if(offerRepository.GetOffer(id) != null)
+            {
+                offerRepository.DeleteOffer(id);
+            }
+            //advertRepository.DeleteAdvert(id);
             return RedirectToAction("UserAdverts");
         }
 
 
         [HttpGet]
-        public IActionResult EditAdvert(string id)
+        public IActionResult EditAdvert(string id, EditAdvertViewModel model)
         {
-            var advert = advertRepository.GetAdvert(id);
-            return View(advert);
+            if (requestRepository.GetRequest(id) != null)
+            {
+                var request = requestRepository.GetRequest(id);
+                model.AdvertType = request.AdvertType;
+                model.Id = request.Id;
+                model.CityFrom = request.CityFrom;
+                model.CityTo = request.CityTo;
+                model.RequestType = request.RequestType;
+                model.PassengerAmmount = request.PassengerAmmount;
+                model.Size = request.Size;
+                model.Weight = request.Weight;
+                model.IsFragile = request.IsFragile;
+                model.Description = request.Description;
+                model.AdditionalBaggage = request.AdditionalBaggage;
+                return View(model);
+            }
+            else if (offerRepository.GetOffer(id) != null)
+            {
+                var offer = offerRepository.GetOffer(id);
+                model.AdvertType = offer.AdvertType;
+                model.Id = offer.Id;
+                model.CityFrom = offer.CityFrom;
+                model.CityTo = offer.CityTo;
+                model.OfferType = offer.OfferType;
+                model.PassengerLimit = offer.PassengerLimit;
+                model.MaxSize = offer.MaxSize;
+                model.MaxWeight = offer.MaxWeight;
+                model.Description = offer.Description;
+                model.AdditionalBaggage = offer.AdditionalBaggage;
+                return View(model);
+            }
+            return View();
         }
 
         [HttpPost]
-        public IActionResult EditAdvert(Advert model)
+        public IActionResult EditAdvert(EditAdvertViewModel model, Request request, Offer offer)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && model.AdvertType == "Prośba")
             {
-                model.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                advertRepository.UpdateAdvert(model);
+                request.UserID = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                requestRepository.UpdateRequest(request);
+                return RedirectToAction("UserAdverts");
+            }
+            else if (ModelState.IsValid && model.AdvertType == "Oferta")
+            {
+                offer.UserID = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                offerRepository.UpdateOffer(offer);
                 return RedirectToAction("UserAdverts");
             }
             return View();

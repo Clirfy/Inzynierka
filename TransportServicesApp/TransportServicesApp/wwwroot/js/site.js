@@ -18,7 +18,7 @@ function confirmDelete(uniqueId, isDeleteClicked) {
 }
 
 
-// for egzample: when cargo type checked - hide passenger options
+// for example: when cargo type checked - hide passenger options
 function ChangeAdvertType(swapper) {
     var passenger = 'passenger';
     var cargo = 'cargo';
