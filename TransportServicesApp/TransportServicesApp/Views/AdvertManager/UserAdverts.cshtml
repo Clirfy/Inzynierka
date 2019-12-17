@@ -37,11 +37,11 @@
                     <div class="row">
                         <div class="col-md-3">
                             <label>Rodzaj Transportu:</label>
-                            @if (advert.RequestType == "1")
+                            @if (advert.AdvertOption == 1)
                             {
                                 <h6 class="text-black-50">Przejazd Pasażerski</h6>
                             }
-                            else if (advert.RequestType == "2")
+                            else if (advert.AdvertOption == 2)
                             {
                                 <h6 class="text-black-50">Przewóz Towaru</h6>
                             }
@@ -50,7 +50,7 @@
                                 <h6 class="text-black-50">Niezdefiniowany</h6>
                             }
                         </div>
-                        @if (advert.RequestType == "1" || advert.RequestType == "0")
+                        @if (advert.AdvertOption == 1 || advert.AdvertOption == 0)
                         {
                             <div class="col-md-3">
                                 <label>Ilość Pasażerów:</label>
@@ -68,7 +68,7 @@
                                 }
                             </div>
                         }
-                        @if (advert.RequestType == "2" || advert.RequestType == "0")
+                        @if (advert.AdvertOption == 2 || advert.AdvertOption == 0)
                         {
                             <div class="col-md-3">
                                 <label>Rozmiary:</label>
@@ -99,11 +99,11 @@
                     <div class="row">
                         <div class="col-md-3">
                             <label>Rodzaj Transportu:</label>
-                            @if (advert.OfferType == "1")
+                            @if (advert.AdvertOption == 1)
                             {
                                 <h6 class="text-black-50">Przejazd Pasażerski</h6>
                             }
-                            else if (advert.OfferType == "2")
+                            else if (advert.AdvertOption == 2)
                             {
                                 <h6 class="text-black-50">Przewóz Towaru</h6>
                             }
@@ -112,7 +112,7 @@
                                 <h6 class="text-black-50">Niezdefiniowany</h6>
                             }
                         </div>
-                        @if (advert.OfferType == "1" || advert.OfferType == "0")
+                        @if (advert.AdvertOption == 1 || advert.AdvertOption == 0)
                         {
                             <div class="col-md-3">
                                 <label>Limit Pasażerów:</label>
@@ -130,7 +130,7 @@
                                 }
                             </div>
                         }
-                        @if (advert.OfferType == "2" || advert.OfferType == "0")
+                        @if (advert.AdvertOption == 2 || advert.AdvertOption == 0)
                         {
                             <div class="col-md-3">
                                 <label>Max. Rozmiary:</label>

@@ -18,13 +18,10 @@ namespace TransportServicesApp.Controllers
         private readonly IOfferRepository offerRepository;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public SearchController(AppDbContext dbContext, IAdvertRepository advertRepository,
-            IRequestRepository requestRepository, IOfferRepository offerRepository, UserManager<ApplicationUser> userManager)
+        public SearchController(AppDbContext dbContext, IAdvertRepository advertRepository, UserManager<ApplicationUser> userManager)
         {
             this.dbContext = dbContext;
             this.advertRepository = advertRepository;
-            this.requestRepository = requestRepository;
-            this.offerRepository = offerRepository;
             this.userManager = userManager;
         }
 
@@ -58,9 +55,17 @@ namespace TransportServicesApp.Controllers
         {
             if(advertType == "Prośba")
             {
-                var adverts = requestRepository.RequestSearchResults(cityFrom, cityTo);
+                var adverts = advertRepository.GetRequestResults(cityFrom, cityTo);
                 foreach (var item in adverts)
                 {
+                    foreach (var data in dbContext.Users)
+                    {
+                        if (data.Id == item.UserId)
+                        {
+                            item.UserImage = data.Image;
+                            item.UserName = data.UserName;
+                        }
+                    }
                     var searchResultViewModel = new SearchResultViewModel
                     {
                         Id = item.Id,
@@ -73,7 +78,9 @@ namespace TransportServicesApp.Controllers
                         PassengerAmmount = item.PassengerAmmount,
                         AdvertType = item.AdvertType,
                         IsFragile = item.IsFragile,
-                        RequestType = item.RequestType
+                        AdvertOption = item.AdvertOption,
+                        UserImage = item.UserImage,
+                        UserName = item.UserName
                     };
                     model.Add(searchResultViewModel);
                 }
@@ -81,9 +88,17 @@ namespace TransportServicesApp.Controllers
             }
             if(advertType == "Oferta")
             {
-                var adverts = offerRepository.OfferSearchResults(cityFrom, cityTo);
+                var adverts = advertRepository.GetOfferResults(cityFrom, cityTo);
                 foreach (var item in adverts)
                 {
+                    foreach (var data in dbContext.Users)
+                    {
+                        if (data.Id == item.UserId)
+                        {
+                            item.UserImage = data.Image;
+                            item.UserName = data.UserName;
+                        }
+                    }
                     var searchResultViewModel = new SearchResultViewModel
                     {
                         Id = item.Id,
@@ -95,18 +110,27 @@ namespace TransportServicesApp.Controllers
                         MaxWeight = item.MaxWeight,
                         PassengerLimit = item.PassengerLimit,
                         AdvertType = item.AdvertType,
-                        OfferType = item.OfferType
+                        AdvertOption = item.AdvertOption,
+                        UserImage = item.UserImage,
+                        UserName = item.UserName
                     };
                     model.Add(searchResultViewModel);
                 }
-                return View(adverts);
+                return View(model);
             }
             if (advertType == "All")
             {
-                var requests = requestRepository.RequestSearchResults(cityFrom, cityTo);
-                var offers = offerRepository.OfferSearchResults(cityFrom, cityTo);
-                foreach (var item in requests)
+                var adverts = advertRepository.GetAllResults(cityFrom, cityTo);
+                foreach (var item in adverts)
                 {
+                    foreach (var data in dbContext.Users)
+                    {
+                        if (data.Id == item.UserId)
+                        {
+                            item.UserImage = data.Image;
+                            item.UserName = data.UserName;
+                        }
+                    }
                     var searchResultViewModel = new SearchResultViewModel
                     {
                         Id = item.Id,
@@ -115,28 +139,16 @@ namespace TransportServicesApp.Controllers
                         CityTo = item.CityTo,
                         Description = item.Description,
                         Size = item.Size,
-                        Weight = item.Weight,
-                        PassengerAmmount = item.PassengerAmmount,
-                        AdvertType = item.AdvertType,
-                        IsFragile = item.IsFragile,
-                        RequestType = item.RequestType
-                    };
-                    model.Add(searchResultViewModel);
-                }
-                foreach (var item in offers)
-                {
-                    var searchResultViewModel = new SearchResultViewModel
-                    {
-                        Id = item.Id,
-                        AdditionalBaggage = item.AdditionalBaggage,
-                        CityFrom = item.CityFrom,
-                        CityTo = item.CityTo,
-                        Description = item.Description,
                         MaxSize = item.MaxSize,
+                        Weight = item.Weight,
                         MaxWeight = item.MaxWeight,
+                        PassengerAmmount = item.PassengerAmmount,
                         PassengerLimit = item.PassengerLimit,
                         AdvertType = item.AdvertType,
-                        OfferType = item.OfferType
+                        IsFragile = item.IsFragile,
+                        AdvertOption = item.AdvertOption,
+                        UserImage = item.UserImage,
+                        UserName = item.UserName
                     };
                     model.Add(searchResultViewModel);
                 }
@@ -151,7 +163,7 @@ namespace TransportServicesApp.Controllers
         //-----------------JQuery autocomplete actions------------------
         public IActionResult GetCityFrom(string term)
         {
-            var city = dbContext.Requests
+            var city = dbContext.Adverts
                 .Where(n => n.CityFrom.ToLower().Contains(term.ToLower()))
                 .Select(n => n.CityFrom).Distinct();
 
@@ -164,7 +176,7 @@ namespace TransportServicesApp.Controllers
 
         public IActionResult GetCityTo(string term)
         {
-            var city = dbContext.Requests
+            var city = dbContext.Adverts
                 .Where(n => n.CityTo.ToUpper().Contains(term.ToUpper()))
                 .Select(n => n.CityTo).Distinct();
 

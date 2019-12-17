@@ -10,7 +10,7 @@ using TransportServicesApp.Models;
 namespace TransportServicesApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20191216113804_Initial")]
+    [Migration("20191217173744_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -154,7 +154,7 @@ namespace TransportServicesApp.Migrations
 
                     b.Property<string>("MaxWeight");
 
-                    b.Property<int>("PassageType");
+                    b.Property<int>("OfferType");
 
                     b.Property<string>("PassengerAmmount");
 
@@ -239,6 +239,8 @@ namespace TransportServicesApp.Migrations
 
                     b.Property<bool>("AdditionalBaggage");
 
+                    b.Property<string>("AdvertType");
+
                     b.Property<string>("CityFrom");
 
                     b.Property<string>("CityTo");
@@ -270,6 +272,8 @@ namespace TransportServicesApp.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("AdditionalBaggage");
+
+                    b.Property<string>("AdvertType");
 
                     b.Property<string>("CityFrom");
 

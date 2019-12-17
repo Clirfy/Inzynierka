@@ -12,159 +12,159 @@
 {
     foreach (var advert in Model)
     {
-<div class="card mb-3">
-    <div class="card-header">
-        <div class="row">
-            <div class="col-md-8">
-                <span class="text-black-50">@advert.AdvertType</span>
-                <span> transportu z </span>
-                <span class="text-black-50">@advert.CityFrom</span>
-                <span> do </span>
-                <span class="text-black-50">@advert.CityTo</span>
-            </div>
+        <div class="card mb-3">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-8">
+                        <span class="text-black-50">@advert.AdvertType</span>
+                        <span> transportu z </span>
+                        <span class="text-black-50">@advert.CityFrom</span>
+                        <span> do </span>
+                        <span class="text-black-50">@advert.CityTo</span>
+                    </div>
 
-            <div class="col-md-4 text-right">
-                @{
+                    <div class="col-md-4 text-right">
+                        @{
                             var imgSrc = String.Format("data:image/gif;base64,{0}", advert.UserImage);
-                }
-                <span>@advert.UserName</span>
-                <img src="@imgSrc" style="height:80px; width:80px" />
+                        }
+                        <span>@advert.UserName</span>
+                        <img src="@imgSrc" style="height:80px; width:80px" />
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    @if (advert.AdvertType == "Prośba")
+            @if (advert.AdvertType == "Prośba")
             {
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-3">
-                <label>Rodzaj Transportu:</label>
-                @if (advert.RequestType == "1")
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Rodzaj Transportu:</label>
+                            @if (advert.AdvertOption == 1)
                             {
-                <h6 class="text-black-50">Przejazd Pasażerski</h6>
+                                <h6 class="text-black-50">Przejazd Pasażerski</h6>
                             }
-                            else if (advert.RequestType == "2")
+                            else if (advert.AdvertOption == 2)
                             {
-                <h6 class="text-black-50">Przewóz Towaru</h6>
+                                <h6 class="text-black-50">Przewóz Towaru</h6>
                             }
                             else
                             {
-                <h6 class="text-black-50">Niezdefiniowany</h6>
+                                <h6 class="text-black-50">Niezdefiniowany</h6>
                             }
-            </div>
-            @if (advert.RequestType == "1" || advert.RequestType == "0")
+                        </div>
+                        @if (advert.AdvertOption == 1 || advert.AdvertOption == 0)
                         {
-            <div class="col-md-3">
-                <label>Ilość Pasażerów:</label>
-                <h6 class="text-black-50">@advert.PassengerAmmount</h6>
-            </div>
-            <div class="col-md-3">
-                <label>Dodatkowy Bagaż:</label>
-                @if (advert.AdditionalBaggage)
+                            <div class="col-md-3">
+                                <label>Ilość Pasażerów:</label>
+                                <h6 class="text-black-50">@advert.PassengerAmmount</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Dodatkowy Bagaż:</label>
+                                @if (advert.AdditionalBaggage)
                                 {
-                <h6 class="text-black-50">Tak</h6>
+                                    <h6 class="text-black-50">Tak</h6>
                                 }
                                 else
                                 {
-                <h6 class="text-black-50">Nie</h6>
+                                    <h6 class="text-black-50">Nie</h6>
                                 }
-            </div>
+                            </div>
                         }
-            @if (advert.RequestType == "2" || advert.RequestType == "0")
+                        @if (advert.AdvertOption == 2 || advert.AdvertOption == 0)
                         {
-            <div class="col-md-3">
-                <label>Rozmiary:</label>
-                <h6 class="text-black-50">@advert.Size</h6>
-            </div>
-            <div class="col-md-3">
-                <label>Waga:</label>
-                <h6 class="text-black-50">@advert.Weight Kg</h6>
-            </div>
-            <div class="col-md-3">
-                <label>Towar delikatny:</label>
-                @if (advert.IsFragile)
+                            <div class="col-md-3">
+                                <label>Rozmiary:</label>
+                                <h6 class="text-black-50">@advert.Size</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Waga:</label>
+                                <h6 class="text-black-50">@advert.Weight Kg</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Towar delikatny:</label>
+                                @if (advert.IsFragile)
                                 {
-                <h6 class="text-black-50">Tak</h6>
+                                    <h6 class="text-black-50">Tak</h6>
                                 }
                                 else
                                 {
-                <h6 class="text-black-50">Nie</h6>
+                                    <h6 class="text-black-50">Nie</h6>
                                 }
-            </div>
+                            </div>
                         }
-        </div>
-    </div>
+                    </div>
+                </div>
             }
-    @if (advert.AdvertType == "Oferta")
+            @if (advert.AdvertType == "Oferta")
             {
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-3">
-                <label>Rodzaj Transportu:</label>
-                @if (advert.OfferType == "1")
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Rodzaj Transportu:</label>
+                            @if (advert.AdvertOption == 1)
                             {
-                <h6 class="text-black-50">Przejazd Pasażerski</h6>
+                                <h6 class="text-black-50">Przejazd Pasażerski</h6>
                             }
-                            else if (advert.OfferType == "2")
+                            else if (advert.AdvertOption == 2)
                             {
-                <h6 class="text-black-50">Przewóz Towaru</h6>
+                                <h6 class="text-black-50">Przewóz Towaru</h6>
                             }
                             else
                             {
-                <h6 class="text-black-50">Niezdefiniowany</h6>
+                                <h6 class="text-black-50">Niezdefiniowany</h6>
                             }
-            </div>
-            @if (advert.OfferType == "1" || advert.OfferType == "0")
+                        </div>
+                        @if (advert.AdvertOption == 1 || advert.AdvertOption == 0)
                         {
-            <div class="col-md-3">
-                <label>Limit Pasażerów:</label>
-                <h6 class="text-black-50">@advert.PassengerLimit</h6>
-            </div>
-            <div class="col-md-3">
-                <label>Miejsce Na Dodatkowy Bagaż:</label>
-                @if (advert.AdditionalBaggage == true)
+                            <div class="col-md-3">
+                                <label>Limit Pasażerów:</label>
+                                <h6 class="text-black-50">@advert.PassengerLimit</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Miejsce Na Dodatkowy Bagaż:</label>
+                                @if (advert.AdditionalBaggage == true)
                                 {
-                <h6 class="text-black-50">Tak</h6>
+                                    <h6 class="text-black-50">Tak</h6>
                                 }
                                 else
                                 {
-                <h6 class="text-black-50">Nie</h6>
+                                    <h6 class="text-black-50">Nie</h6>
                                 }
-            </div>
+                            </div>
                         }
-            @if (advert.OfferType == "2" || advert.OfferType == "0")
+                        @if (advert.AdvertOption == 2 || advert.AdvertOption == 0)
                         {
-            <div class="col-md-3">
-                <label>Max. Rozmiary:</label>
-                <h6 class="text-black-50">@advert.MaxSize</h6>
-            </div>
-            <div class="col-md-3">
-                <label>Max. Waga:</label>
-                <h6 class="text-black-50">@advert.MaxWeight</h6>
-            </div>
+                            <div class="col-md-3">
+                                <label>Max. Rozmiary:</label>
+                                <h6 class="text-black-50">@advert.MaxSize</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Max. Waga:</label>
+                                <h6 class="text-black-50">@advert.MaxWeight</h6>
+                            </div>
                         }
-        </div>
-    </div>
+                    </div>
+                </div>
             }
 
 
-    <div class="card-footer">
-        <form method="post" asp-action="DeleteAdvert" asp-route-id="@advert.Id">
-            <a asp-controller="Advertmanager" asp-action="EditAdvert"
-               asp-route-id="@advert.Id" class="btn btn-primary">Edytuj</a>
+            @*<div class="card-footer">
+                    <form method="post" asp-action="DeleteAdvert" asp-route-id="@advert.Id">
+                        <a asp-controller="Advertmanager" asp-action="EditAdvert"
+                           asp-route-id="@advert.Id" class="btn btn-primary">Edytuj</a>
 
-            <span id="confirmDeleteSpan_@advert.Id" style="display:none">
-                <span>Czy na pewno chcesz usunąć?</span>
-                <button type="submit" class="btn btn-danger">Tak</button>
-                <a class="btn btn-primary"
-                   onclick="confirmDelete('@advert.Id', false)">Nie</a>
-            </span>
+                        <span id="confirmDeleteSpan_@advert.Id" style="display:none">
+                            <span>Czy na pewno chcesz usunąć?</span>
+                            <button type="submit" class="btn btn-danger">Tak</button>
+                            <a class="btn btn-primary"
+                               onclick="confirmDelete('@advert.Id', false)">Nie</a>
+                        </span>
 
-            <span id="deleteSpan_@advert.Id">
-                <a class="btn btn-danger"
-                   onclick="confirmDelete('@advert.Id', true)">Usuń</a>
-            </span>
-        </form>
-    </div>
-</div>
+                        <span id="deleteSpan_@advert.Id">
+                            <a class="btn btn-danger"
+                               onclick="confirmDelete('@advert.Id', true)">Usuń</a>
+                        </span>
+                    </form>
+                </div>*@
+        </div>
     }
 }

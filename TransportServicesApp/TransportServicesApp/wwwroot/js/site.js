@@ -26,12 +26,12 @@ function ChangeAdvertType(swapper) {
     if (swapper == 1) {
         $('#' + cargo).hide();
         $('#' + passenger).show();
-        $('#passengerRadio').attr("checked", true);
+        $('#passengerRadio').prop("checked", true);
     } else if (swapper == 2) {
         $('#' + passenger).hide();
         $('#' + cargo).show();
         $('#cargoRadio').prop("checked", true);
-    } else {
+    } else if (swapper == 0) {
         $('#' + passenger).show();
         $('#' + cargo).show();
         $('#customRadio').prop("checked", true);

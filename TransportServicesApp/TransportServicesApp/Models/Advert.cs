@@ -23,8 +23,6 @@ namespace TransportServicesApp.Models
 
         //-----------Request details---------------
 
-        public int RequestType { get; set; }
-
         public string PassengerAmmount { get; set; }
 
         public string Size { get; set; }
@@ -40,7 +38,6 @@ namespace TransportServicesApp.Models
 
 
         //-----------Passage details---------------
-        public int PassageType { get; set; }
 
         public string PassengerLimit { get; set; }
 
@@ -61,5 +58,6 @@ namespace TransportServicesApp.Models
 
 
         public string AdvertType { get; set; }
+        public int AdvertOption { get; set; }
     }
 }

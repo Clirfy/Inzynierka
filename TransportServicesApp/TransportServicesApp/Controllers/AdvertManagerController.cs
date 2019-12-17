@@ -18,22 +18,18 @@ namespace TransportServicesApp.Controllers
         private readonly IRequestRepository requestRepository;
         private readonly IOfferRepository offerRepository;
 
-        public AdvertManagerController(IAdvertRepository advertRepository, AppDbContext dbContext,
-            IRequestRepository requestRepository, IOfferRepository offerRepository)
+        public AdvertManagerController(IAdvertRepository advertRepository, AppDbContext dbContext)
         {
             this.advertRepository = advertRepository;
             this.dbContext = dbContext;
-            this.requestRepository = requestRepository;
-            this.offerRepository = offerRepository;
         }
 
         public ViewResult UserAdverts(List<UserAdvertsViewModel> model)
         {
             var id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var requests = requestRepository.GetUserRequests(id);
-            var offers = offerRepository.GetUserOffers(id);
+            var advert = advertRepository.GetUserAdverts(id);
 
-            foreach (var item in requests)
+            foreach (var item in advert)
             {
                 var userAdvertsViewModel = new UserAdvertsViewModel
                 {
@@ -45,31 +41,58 @@ namespace TransportServicesApp.Controllers
                     Size = item.Size,
                     Weight = item.Weight,
                     PassengerAmmount = item.PassengerAmmount,
-                    AdvertType = item.AdvertType,
                     IsFragile = item.IsFragile,
-                    RequestType = item.RequestType
-                };
-                model.Add(userAdvertsViewModel);
-            }
-            foreach (var item in offers)
-            {
-                var userAdvertsViewModel = new UserAdvertsViewModel
-                {
-                    Id = item.Id,
-                    AdditionalBaggage = item.AdditionalBaggage,
-                    CityFrom = item.CityFrom,
-                    CityTo = item.CityTo,
-                    Description = item.Description,
                     MaxSize = item.MaxSize,
                     MaxWeight = item.MaxWeight,
                     PassengerLimit = item.PassengerLimit,
                     AdvertType = item.AdvertType,
-                    OfferType = item.OfferType
+                    AdvertOption = item.AdvertOption
                 };
                 model.Add(userAdvertsViewModel);
             }
 
             return View(model);
+            //var id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            //var requests = requestRepository.GetUserRequests(id);
+            //var offers = offerRepository.GetUserOffers(id);
+
+            //foreach (var item in requests)
+            //{
+            //    var userAdvertsViewModel = new UserAdvertsViewModel
+            //    {
+            //        Id = item.Id,
+            //        AdditionalBaggage = item.AdditionalBaggage,
+            //        CityFrom = item.CityFrom,
+            //        CityTo = item.CityTo,
+            //        Description = item.Description,
+            //        Size = item.Size,
+            //        Weight = item.Weight,
+            //        PassengerAmmount = item.PassengerAmmount,
+            //        AdvertType = item.AdvertType,
+            //        IsFragile = item.IsFragile,
+            //        RequestType = item.RequestType
+            //    };
+            //    model.Add(userAdvertsViewModel);
+            //}
+            //foreach (var item in offers)
+            //{
+            //    var userAdvertsViewModel = new UserAdvertsViewModel
+            //    {
+            //        Id = item.Id,
+            //        AdditionalBaggage = item.AdditionalBaggage,
+            //        CityFrom = item.CityFrom,
+            //        CityTo = item.CityTo,
+            //        Description = item.Description,
+            //        MaxSize = item.MaxSize,
+            //        MaxWeight = item.MaxWeight,
+            //        PassengerLimit = item.PassengerLimit,
+            //        AdvertType = item.AdvertType,
+            //        OfferType = item.OfferType
+            //    };
+            //    model.Add(userAdvertsViewModel);
+            //}
+
+            //return View(model);
         }
 
         //---------------Add Request---------------
@@ -81,14 +104,14 @@ namespace TransportServicesApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddRequestAdvert(Request model)
+        public IActionResult AddRequestAdvert(Advert model)
         {
             if (ModelState.IsValid)
             {
-                model.UserID = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                model.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 model.UserName = User.FindFirst(ClaimTypes.Name).Value;
                 model.AdvertType = "Prośba";
-                requestRepository.AddRequest(model);
+                advertRepository.AddAdvert(model);
                 return RedirectToAction("UserAdverts");
             }
 
@@ -127,14 +150,14 @@ namespace TransportServicesApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddPassageAdvert(Offer model)
+        public IActionResult AddPassageAdvert(Advert model)
         {
             if (ModelState.IsValid)
             {
-                model.UserID = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                model.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 model.UserName = User.FindFirst(ClaimTypes.Name).Value;
                 model.AdvertType = "Oferta";
-                offerRepository.AddOffer(model);
+                advertRepository.AddAdvert(model);
                 return RedirectToAction("UserAdverts");
             }
 
@@ -164,14 +187,15 @@ namespace TransportServicesApp.Controllers
         [HttpPost]
         public IActionResult DeleteAdvert(string id)
         {
-            if(requestRepository.GetRequest(id) != null)
-            {
-                requestRepository.DeleteRequest(id);
-            }
-            if(offerRepository.GetOffer(id) != null)
-            {
-                offerRepository.DeleteOffer(id);
-            }
+            advertRepository.DeleteAdvert(id);
+            //if(requestRepository.GetRequest(id) != null)
+            //{
+            //    requestRepository.DeleteRequest(id);
+            //}
+            //if(offerRepository.GetOffer(id) != null)
+            //{
+            //    offerRepository.DeleteOffer(id);
+            //}
             //advertRepository.DeleteAdvert(id);
             return RedirectToAction("UserAdverts");
         }
@@ -180,55 +204,78 @@ namespace TransportServicesApp.Controllers
         [HttpGet]
         public IActionResult EditAdvert(string id, EditAdvertViewModel model)
         {
-            if (requestRepository.GetRequest(id) != null)
-            {
-                var request = requestRepository.GetRequest(id);
-                model.AdvertType = request.AdvertType;
-                model.Id = request.Id;
-                model.CityFrom = request.CityFrom;
-                model.CityTo = request.CityTo;
-                model.RequestType = request.RequestType;
-                model.PassengerAmmount = request.PassengerAmmount;
-                model.Size = request.Size;
-                model.Weight = request.Weight;
-                model.IsFragile = request.IsFragile;
-                model.Description = request.Description;
-                model.AdditionalBaggage = request.AdditionalBaggage;
-                return View(model);
-            }
-            else if (offerRepository.GetOffer(id) != null)
-            {
-                var offer = offerRepository.GetOffer(id);
-                model.AdvertType = offer.AdvertType;
-                model.Id = offer.Id;
-                model.CityFrom = offer.CityFrom;
-                model.CityTo = offer.CityTo;
-                model.OfferType = offer.OfferType;
-                model.PassengerLimit = offer.PassengerLimit;
-                model.MaxSize = offer.MaxSize;
-                model.MaxWeight = offer.MaxWeight;
-                model.Description = offer.Description;
-                model.AdditionalBaggage = offer.AdditionalBaggage;
-                return View(model);
-            }
-            return View();
+            var advert = advertRepository.GetAdvert(id);
+            model.Id = advert.Id;
+            model.CityFrom = advert.CityFrom;
+            model.CityTo = advert.CityTo;
+            model.PassengerAmmount = advert.PassengerAmmount;
+            model.PassengerLimit = advert.PassengerLimit;
+            model.Size = advert.Size;
+            model.MaxSize = advert.MaxSize;
+            model.Weight = advert.Weight;
+            model.MaxWeight = advert.MaxWeight;
+            model.IsFragile = advert.IsFragile;
+            model.Description = advert.Description;
+            model.AdditionalBaggage = advert.AdditionalBaggage;
+            model.AdvertType = advert.AdvertType;
+            model.AdvertOption = advert.AdvertOption;
+
+            return View(model);
+            //if (requestRepository.GetRequest(id) != null)
+            //{
+            //    var request = requestRepository.GetRequest(id);
+            //    model.AdvertType = request.AdvertType;
+            //    model.Id = request.Id;
+            //    model.CityFrom = request.CityFrom;
+            //    model.CityTo = request.CityTo;
+            //    model.RequestType = request.RequestType;
+            //    model.PassengerAmmount = request.PassengerAmmount;
+            //    model.Size = request.Size;
+            //    model.Weight = request.Weight;
+            //    model.IsFragile = request.IsFragile;
+            //    model.Description = request.Description;
+            //    model.AdditionalBaggage = request.AdditionalBaggage;
+            //    return View(model);
+            //}
+            //else if (offerRepository.GetOffer(id) != null)
+            //{
+            //    var offer = offerRepository.GetOffer(id);
+            //    model.AdvertType = offer.AdvertType;
+            //    model.Id = offer.Id;
+            //    model.CityFrom = offer.CityFrom;
+            //    model.CityTo = offer.CityTo;
+            //    model.OfferType = offer.OfferType;
+            //    model.PassengerLimit = offer.PassengerLimit;
+            //    model.MaxSize = offer.MaxSize;
+            //    model.MaxWeight = offer.MaxWeight;
+            //    model.Description = offer.Description;
+            //    model.AdditionalBaggage = offer.AdditionalBaggage;
+            //    return View(model);
+            //}
+            //return View();
         }
 
         [HttpPost]
-        public IActionResult EditAdvert(EditAdvertViewModel model, Request request, Offer offer)
+        public IActionResult EditAdvert(EditAdvertViewModel model, Advert advert)
         {
-            if (ModelState.IsValid && model.AdvertType == "Prośba")
+            if (ModelState.IsValid)
             {
-                request.UserID = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                requestRepository.UpdateRequest(request);
+                advert.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                advertRepository.UpdateAdvert(advert);
                 return RedirectToAction("UserAdverts");
             }
-            else if (ModelState.IsValid && model.AdvertType == "Oferta")
-            {
-                offer.UserID = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                offerRepository.UpdateOffer(offer);
-                return RedirectToAction("UserAdverts");
-            }
+            //if (ModelState.IsValid && model.AdvertType == "Prośba")
+            //{
+            //    request.UserID = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            //    requestRepository.UpdateRequest(request);
+            //    return RedirectToAction("UserAdverts");
+            //}
+            //else if (ModelState.IsValid && model.AdvertType == "Oferta")
+            //{
+            //    offer.UserID = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            //    offerRepository.UpdateOffer(offer);
+            //    return RedirectToAction("UserAdverts");
+            //}
             return View();
         }
     }

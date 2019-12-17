@@ -20,8 +20,9 @@ namespace TransportServicesApp.Models
 
         Advert UpdateAdvert(Advert advertChanges);
 
-        //AdvertController
-        IEnumerable<Advert> GetSearchResults(string advertType, string cityFrom, string cityTo);
-        IEnumerable<Advert> GetSearchResults(string cityFrom, string cityTo);
+        //SearchController
+        IEnumerable<Advert> GetAllResults(string cityFrom, string cityTo);
+        IEnumerable<Advert> GetRequestResults(string cityFrom, string cityTo);
+        IEnumerable<Advert> GetOfferResults(string cityFrom, string cityTo);
     }
 }

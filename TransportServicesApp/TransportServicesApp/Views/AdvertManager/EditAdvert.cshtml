@@ -5,7 +5,7 @@
 }
 
 
-<body onload="ChangeAdvertType(@Model.RequestType)">
+<body onload="ChangeAdvertType(@Model.AdvertOption)">
     <h1 style="text-align:center">Edytuj Ogłoszenie</h1>
 
     <hr />
@@ -33,18 +33,18 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <label asp-for="RequestType" class="control-label">Rodzaj Prośby</label>
+                            <label asp-for="AdvertOption" class="control-label">Rodzaj Prośby</label>
                             <div class="form-group">
                                 <div class="form-check form-check-inline">
-                                    <input asp-for="RequestType" class="form-check-input" type="radio" id="passengerRadio" value="1" onclick="ChangeAdvertType(1)">
+                                    <input asp-for="AdvertOption" class="form-check-input" type="radio" id="passengerRadio" value="1" onclick="ChangeAdvertType(1)">
                                     <label class="form-check-label" for="passengerRadio">Pasażer</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input asp-for="RequestType" class="form-check-input" type="radio" id="cargoRadio" value="2" onclick="ChangeAdvertType(2)">
+                                    <input asp-for="AdvertOption" class="form-check-input" type="radio" id="cargoRadio" value="2" onclick="ChangeAdvertType(2)">
                                     <label class="form-check-label" for="cargoRadio">Towar</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input asp-for="RequestType" class="form-check-input" type="radio" id="customRadio" value="0" onclick="ChangeAdvertType(0)" checked>
+                                    <input asp-for="AdvertOption" class="form-check-input" type="radio" id="customRadio" value="0" onclick="ChangeAdvertType(0)" checked>
                                     <label class="form-check-label" for="customRadio">Niestandardowy</label>
                                 </div>
                             </div>
@@ -135,18 +135,18 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <label asp-for="OfferType" class="control-label">Rodzaj Oferty</label>
+                            <label asp-for="AdvertOption" class="control-label">Rodzaj Oferty</label>
                             <div class="form-group">
                                 <div class="form-check form-check-inline">
-                                    <input asp-for="OfferType" class="form-check-input" type="radio" id="passengerRadio" value="1" onclick="ChangeAdvertType(1)">
+                                    <input asp-for="AdvertOption" class="form-check-input" type="radio" id="passengerRadio" value="1" onclick="ChangeAdvertType(1)">
                                     <label class="form-check-label" for="passengerRadio">Pasażer</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input asp-for="OfferType" class="form-check-input" type="radio" id="cargoRadio" value="2" onclick="ChangeAdvertType(2)">
+                                    <input asp-for="AdvertOption" class="form-check-input" type="radio" id="cargoRadio" value="2" onclick="ChangeAdvertType(2)">
                                     <label class="form-check-label" for="cargoRadio">Towar</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input asp-for="OfferType" class="form-check-input" type="radio" id="customRadio" value="0" onclick="ChangeAdvertType(0)" checked>
+                                    <input asp-for="AdvertOption" class="form-check-input" type="radio" id="customRadio" value="0" onclick="ChangeAdvertType(0)" checked>
                                     <label class="form-check-label" for="customRadio">Niestandardowy</label>
                                 </div>
                             </div>

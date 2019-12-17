@@ -10,8 +10,8 @@ using TransportServicesApp.Models;
 namespace TransportServicesApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20191216121420_AddedAdvertTypeForCorrectSelection")]
-    partial class AddedAdvertTypeForCorrectSelection
+    [Migration("20191217181552_AdvertOptions")]
+    partial class AdvertOptions
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -138,6 +138,8 @@ namespace TransportServicesApp.Migrations
 
                     b.Property<bool>("AdditionalBaggage");
 
+                    b.Property<int>("AdvertOption");
+
                     b.Property<string>("AdvertType");
 
                     b.Property<string>("CityFrom")
@@ -154,13 +156,9 @@ namespace TransportServicesApp.Migrations
 
                     b.Property<string>("MaxWeight");
 
-                    b.Property<int>("PassageType");
-
                     b.Property<string>("PassengerAmmount");
 
                     b.Property<string>("PassengerLimit");
-
-                    b.Property<int>("RequestType");
 
                     b.Property<string>("Size");
 

@@ -12,9 +12,8 @@ namespace TransportServicesApp.ViewModels
         public string CityTo { get; set; }
 
 
-        public string RequestType { get; set; }
 
-        public int PassengerAmmount { get; set; }
+        public string PassengerAmmount { get; set; }
 
         public string Size { get; set; }
 
@@ -27,9 +26,8 @@ namespace TransportServicesApp.ViewModels
 
 
 
-        public string OfferType { get; set; }
 
-        public int PassengerLimit { get; set; }
+        public string PassengerLimit { get; set; }
 
         public string MaxSize { get; set; }
 
@@ -47,5 +45,6 @@ namespace TransportServicesApp.ViewModels
 
 
         public string AdvertType { get; set; }
+        public int AdvertOption { get; set; }
     }
 }

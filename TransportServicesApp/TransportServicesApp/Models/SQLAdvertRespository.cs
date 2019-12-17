@@ -24,7 +24,7 @@ namespace TransportServicesApp.Models
         public Advert DeleteAdvert(string advertId)
         {
             var advert = dbContext.Adverts.Find(advertId);
-            if(advert != null)
+            if (advert != null)
             {
                 dbContext.Adverts.Remove(advert);
                 dbContext.SaveChanges();
@@ -42,19 +42,28 @@ namespace TransportServicesApp.Models
             return dbContext.Adverts;
         }
 
-        public IEnumerable<Advert> GetSearchResults(string advertType, string cityFrom, string cityTo)
+        public IEnumerable<Advert> GetAllResults(string cityFrom, string cityTo)
         {
             return dbContext.Adverts
-                .Where(n => n.AdvertType == advertType)
                 .Where(n => n.CityFrom == cityFrom)
                 .Where(n => n.CityTo == cityTo);
         }
 
-        public IEnumerable<Advert> GetSearchResults(string cityFrom, string cityTo)
+        public IEnumerable<Advert> GetOfferResults(string cityFrom, string cityTo)
         {
             return dbContext.Adverts
                 .Where(n => n.CityFrom == cityFrom)
-                .Where(n => n.CityTo == cityTo);
+                .Where(n => n.CityTo == cityTo)
+                .Where(n => n.AdvertType == "Oferta");
+        }
+
+        public IEnumerable<Advert> GetRequestResults(string cityFrom, string cityTo)
+        {
+            return dbContext.Adverts
+                .Where(n => n.CityFrom == cityFrom)
+                .Where(n => n.CityTo == cityTo)
+                .Where(n => n.AdvertType == "Prośba");
+
         }
 
         public IEnumerable<Advert> GetUserAdverts(string userId)

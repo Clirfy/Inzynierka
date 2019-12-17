@@ -21,7 +21,7 @@ namespace TransportServicesApp.Migrations
                     Weight = table.Column<string>(nullable: true),
                     IsFragile = table.Column<bool>(nullable: false),
                     AdditionalBaggage = table.Column<bool>(nullable: false),
-                    PassageType = table.Column<int>(nullable: false),
+                    OfferType = table.Column<int>(nullable: false),
                     PassengerLimit = table.Column<string>(nullable: true),
                     MaxSize = table.Column<string>(nullable: true),
                     MaxWeight = table.Column<string>(nullable: true),
@@ -92,7 +92,8 @@ namespace TransportServicesApp.Migrations
                     UserID = table.Column<string>(nullable: true),
                     UserName = table.Column<string>(nullable: true),
                     UserImage = table.Column<string>(nullable: true),
-                    AdditionalBaggage = table.Column<bool>(nullable: false)
+                    AdditionalBaggage = table.Column<bool>(nullable: false),
+                    AdvertType = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -115,7 +116,8 @@ namespace TransportServicesApp.Migrations
                     UserID = table.Column<string>(nullable: true),
                     UserName = table.Column<string>(nullable: true),
                     UserImage = table.Column<string>(nullable: true),
-                    AdditionalBaggage = table.Column<bool>(nullable: false)
+                    AdditionalBaggage = table.Column<bool>(nullable: false),
+                    AdvertType = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
