@@ -10,6 +10,8 @@ namespace TransportServicesApp.ViewModels
         public string Id { get; set; }
         public string CityFrom { get; set; }
         public string CityTo { get; set; }
+        public DateTime ExpireDate { get; set; }
+        public DateTime ExpireTime { get; set; }
 
 
 

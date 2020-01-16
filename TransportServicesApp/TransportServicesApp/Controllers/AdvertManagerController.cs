@@ -15,9 +15,6 @@ namespace TransportServicesApp.Controllers
     {
         private readonly IAdvertRepository advertRepository;
         private readonly AppDbContext dbContext;
-        private readonly IRequestRepository requestRepository;
-        private readonly IOfferRepository offerRepository;
-
         public AdvertManagerController(IAdvertRepository advertRepository, AppDbContext dbContext)
         {
             this.advertRepository = advertRepository;
@@ -41,12 +38,15 @@ namespace TransportServicesApp.Controllers
                     Size = item.Size,
                     Weight = item.Weight,
                     PassengerAmmount = item.PassengerAmmount,
+                    IsOccupied = item.IsOcuppied,
+                    SeatsTaken = item.SeatsTaken,
                     IsFragile = item.IsFragile,
                     MaxSize = item.MaxSize,
                     MaxWeight = item.MaxWeight,
                     PassengerLimit = item.PassengerLimit,
                     AdvertType = item.AdvertType,
-                    AdvertOption = item.AdvertOption
+                    AdvertOption = item.AdvertOption,
+                    Expire = item.ExpireDate.Day.ToString() + "-" + item.ExpireDate.Month + "-" + item.ExpireDate.Year + " " + item.ExpireTime.TimeOfDay
                 };
                 model.Add(userAdvertsViewModel);
             }
@@ -200,7 +200,6 @@ namespace TransportServicesApp.Controllers
             return RedirectToAction("UserAdverts");
         }
 
-
         [HttpGet]
         public IActionResult EditAdvert(string id, EditAdvertViewModel model)
         {
@@ -219,6 +218,8 @@ namespace TransportServicesApp.Controllers
             model.AdditionalBaggage = advert.AdditionalBaggage;
             model.AdvertType = advert.AdvertType;
             model.AdvertOption = advert.AdvertOption;
+            model.ExpireDate = advert.ExpireDate;
+            model.ExpireTime = advert.ExpireTime;
 
             return View(model);
             //if (requestRepository.GetRequest(id) != null)

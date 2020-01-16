@@ -148,7 +148,13 @@ namespace TransportServicesApp.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<DateTime>("ExpireDate");
+
+                    b.Property<DateTime>("ExpireTime");
+
                     b.Property<bool>("IsFragile");
+
+                    b.Property<bool>("IsOcuppied");
 
                     b.Property<string>("MaxSize");
 
@@ -157,6 +163,8 @@ namespace TransportServicesApp.Migrations
                     b.Property<string>("PassengerAmmount");
 
                     b.Property<string>("PassengerLimit");
+
+                    b.Property<int>("SeatsTaken");
 
                     b.Property<string>("Size");
 

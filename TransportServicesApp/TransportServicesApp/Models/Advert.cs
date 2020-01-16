@@ -18,7 +18,9 @@ namespace TransportServicesApp.Models
         [Required]
         public string CityTo { get; set; }
 
-
+        [Required]
+        public DateTime ExpireDate { get; set; }
+        public DateTime ExpireTime { get; set; }
 
 
         //-----------Request details---------------
@@ -36,10 +38,11 @@ namespace TransportServicesApp.Models
         public bool AdditionalBaggage { get; set; }
 
 
-
         //-----------Passage details---------------
 
         public string PassengerLimit { get; set; }
+        public int SeatsTaken { get; set; }
+        public bool IsOcuppied { get; set; }
 
         public string MaxSize { get; set; }
 
@@ -58,6 +61,8 @@ namespace TransportServicesApp.Models
 
 
         public string AdvertType { get; set; }
+
+        //1=passenger 2=cargo 0=unid
         public int AdvertOption { get; set; }
     }
 }

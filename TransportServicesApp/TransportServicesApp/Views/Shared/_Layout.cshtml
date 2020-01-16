@@ -8,6 +8,7 @@
     <title>@ViewData["Title"] -  TransportApp</title>
 
     <environment include="Development">
+        <script src="~/lib/moment.js/moment.js"></script>
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
@@ -17,6 +18,8 @@
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link href="~/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+        <link href="~/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker-standalone.css" rel="stylesheet" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -49,8 +52,8 @@
                         {
                             <li>
                                 <div class="dropdown">
-                                    <a class="nav-link dropdown-toggle" style="cursor: pointer;" 
-                                        asp-controller="AdvertManager" asp-action="UserAdverts">
+                                    <a class="nav-link dropdown-toggle" style="cursor: pointer;"
+                                       asp-controller="AdvertManager" asp-action="UserAdverts">
                                         <i class="fas fa-home"></i> Dodaj Ogłoszenie
                                     </a>
                                     <div class="dropdown-content">
@@ -65,7 +68,7 @@
                                 </div>
                             </li>
                         }
-                        @if (signInManager.IsSignedIn(User))
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
                         {
                             <li>
                                 <div class="dropdown">
@@ -85,12 +88,30 @@
                     <ul class="navbar-nav ml-auto">
                         @if (signInManager.IsSignedIn(User))
                         {
-                            <li class="nav-item">
+                            @*<li class="nav-item">
                                 <form method="post" asp-controller="account" asp-action="logout">
                                     <button type="submit" style="width:auto" class="nav-link btn btn-link  text-white">
                                         <i class="fas fa-sign-out-alt"></i> Wyloguj @User.Identity.Name
                                     </button>
                                 </form>
+                            </li>*@
+                            //---------------------------------------------------------------------------------------------
+                            <li>
+                                <div class="dropdown">
+                                    <a class="nav-link dropdown-toggle" style="cursor: pointer;">
+                                        <i class="fas fa-home"></i> @User.Identity.Name
+                                    </a>
+                                    <div class="dropdown-content">
+                                        <a asp-controller="Account"
+                                           asp-action="EditUserAsync">Zarządzaj kontem</a>
+                                        <div class="dropdown-divider"></div>
+                                        <form method="post" asp-controller="account" asp-action="logout">
+                                            <button type="submit" style="width:auto" class="dropdown-item">
+                                                <i class="fas fa-sign-out-alt"></i> Wyloguj @User.Identity.Name
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
                             </li>
                         }
                         else

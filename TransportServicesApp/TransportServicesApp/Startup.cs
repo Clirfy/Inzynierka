@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,6 +34,7 @@ namespace TransportServicesApp
             services.AddScoped<IAdvertRepository, SQLAdvertRespository>();
             services.AddScoped<IOfferRepository, SQLOfferRepository>();
             services.AddScoped<IRequestRepository, SQLRequestRepository>();
+            services.AddScoped<IHangfireRepository, HangfireRepo>();
 
 
             //SQLite provider
@@ -59,6 +61,13 @@ namespace TransportServicesApp
             });
 
 
+
+            //Hangfire
+            services.AddHangfire(x => x.UseSqlServerStorage("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = SoutDB;" +
+                " Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False;" +
+                " ApplicationIntent = ReadWrite; MultiSubnetFailover = False"));
+            services.AddHangfireServer();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -82,6 +91,9 @@ namespace TransportServicesApp
 
             //Needed for Identity (Authentication middleware)
             app.UseAuthentication();
+
+            //hangfire dashboard
+            app.UseHangfireDashboard();
 
             app.UseMvc(routes =>
             {

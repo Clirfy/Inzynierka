@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<UserAdvertsViewModel>
 
 @{
-    ViewData["Title"] = "UserAdverts";
+    ViewData["Title"] = "Moje ogłoszenia";
 }
 
 <h1 style="text-align:center">Moje Ogłoszenia</h1>
@@ -30,6 +30,7 @@
                     <span> do </span>
                     <span class="text-black-50">@advert.CityTo</span>
                 </p>
+                <p>@advert.Expire</p>
             </div>
             @if (advert.AdvertType == "Prośba")
             {

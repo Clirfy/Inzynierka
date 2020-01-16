@@ -182,7 +182,7 @@ namespace TransportServicesApp.Controllers
 
             if (result.Succeeded)
             {
-                return RedirectToAction("EditUserAsync");
+                return RedirectToAction("Index","Home");
             }
 
             foreach (var error in result.Errors)
@@ -190,7 +190,7 @@ namespace TransportServicesApp.Controllers
                 ModelState.AddModelError("", error.Description);
             }
 
-            return View(model);
+            return RedirectToAction("index","home");
         }
 
 

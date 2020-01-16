@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<SearchResultViewModel>
 
 @{
-    ViewData["Title"] = "SearchResult";
+    ViewData["Title"] = "Ogłoszenia";
 }
 
-<h1>SearchResult</h1>
-
+<h1 style="text-align: center">Dostępne Ogłoszenia</h1>
+<hr />
 
 
 @if (Model.Any())
@@ -13,25 +13,29 @@
     foreach (var advert in Model)
     {
         <div class="card mb-3">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-md-8">
-                        <span class="text-black-50">@advert.AdvertType</span>
-                        <span> transportu z </span>
-                        <span class="text-black-50">@advert.CityFrom</span>
-                        <span> do </span>
-                        <span class="text-black-50">@advert.CityTo</span>
-                    </div>
-
-                    <div class="col-md-4 text-right">
-                        @{
-                            var imgSrc = String.Format("data:image/gif;base64,{0}", advert.UserImage);
-                        }
-                        <span>@advert.UserName</span>
-                        <img src="@imgSrc" style="height:80px; width:80px" />
+            <a asp-controller="Search" asp-action="AdvertDetails" asp-route-advertId="@advert.Id">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p>
+                                <span class="text-black-50">@advert.AdvertType</span>
+                                <span style="color: black"> transportu z </span>
+                                <span class="text-black-50">@advert.CityFrom</span>
+                                <span style="color: black"> do </span>
+                                <span class="text-black-50">@advert.CityTo</span>
+                            </p>
+                            <p>@advert.Expire</p>
+                        </div>
+                        <div class="col-md-4 text-right">
+                            @{
+                                var imgSrc = String.Format("data:image/gif;base64,{0}", advert.UserImage);
+                            }
+                            <span style="color: black">@advert.UserName</span>
+                            <img src="@imgSrc" style="height:80px; width:80px" />
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
             @if (advert.AdvertType == "Prośba")
             {
                 <div class="card-body">
@@ -131,6 +135,13 @@
                                 }
                             </div>
                         }
+                        @if (advert.AdvertOption == 1)
+                        {
+                            <div class="col-md-3">
+                                <label>Zajęte miejsca:</label>
+                                <h6 class="text-black-50">@advert.SeatsTaken / @advert.PassengerLimit</h6>
+                            </div>
+                        }
                         @if (advert.AdvertOption == 2 || advert.AdvertOption == 0)
                         {
                             <div class="col-md-3">
@@ -140,6 +151,17 @@
                             <div class="col-md-3">
                                 <label>Max. Waga:</label>
                                 <h6 class="text-black-50">@advert.MaxWeight</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Status:</label>
+                                @if (advert.IsOccupied)
+                                {
+                                    <h6 class="text-black-50">Zarezerwowana</h6>
+                                }
+                                else
+                                {
+                                    <h6 class="text-black-50">Dostępna</h6>
+                                }
                             </div>
                         }
                     </div>

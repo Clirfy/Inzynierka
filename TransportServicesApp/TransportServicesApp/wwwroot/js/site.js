@@ -23,17 +23,22 @@ function ChangeAdvertType(swapper) {
     var passenger = 'passenger';
     var cargo = 'cargo';
 
-    if (swapper == 1) {
-        $('#' + cargo).hide();
-        $('#' + passenger).show();
-        $('#passengerRadio').prop("checked", true);
-    } else if (swapper == 2) {
-        $('#' + passenger).hide();
-        $('#' + cargo).show();
-        $('#cargoRadio').prop("checked", true);
-    } else if (swapper == 0) {
-        $('#' + passenger).show();
-        $('#' + cargo).show();
-        $('#customRadio').prop("checked", true);
+
+    switch (swapper) {
+        case 1:
+            $('#' + cargo).hide();
+            $('#' + passenger).show();
+            $('#passengerRadio').prop("checked", true);
+            break;
+        case 2:
+            $('#' + passenger).hide();
+            $('#' + cargo).show();
+            $('#cargoRadio').prop("checked", true);
+            break;
+        default:
+            $('#' + passenger).show();
+            $('#' + cargo).show();
+            $('#customRadio').prop("checked", true);
+            break;
     }
 }

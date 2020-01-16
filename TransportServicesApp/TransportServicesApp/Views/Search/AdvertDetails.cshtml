@@ -1,0 +1,31 @@
+﻿@model TransportServicesApp.ViewModels.AdvertDetailsViewModel
+
+@{
+    ViewData["Title"] = "Informacje o trasie";
+}
+
+
+
+    <div class="row justify-content-center">
+        <div class="col-md-8" style="text-align: center">
+            <form asp-action="AdvertDetails">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <p>Ogłoszenie użytkownika @Model.UserEmail</p>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.Description != null)
+                        {
+                            <label class="text-black-50">Opis:</label>
+                            <p>@Model.Description</p>
+                        }
+                    </div>
+                </div>
+                <input asp-controller="search" asp-action="BookAdvert" asp-route-email="@Model.UserEmail"
+                       asp-route-advertId="@Model.Id" type="submit" value="Rezerwuj" class="btn btn-primary" style="width:100px" />
+                <input asp-controller="home" asp-action="index" type="submit" value="Wyślij wiadomość" class="btn btn-success" />
+                <hr />
+                <a asp-action="Index">Powrót</a>
+            </form>
+        </div>
+    </div>

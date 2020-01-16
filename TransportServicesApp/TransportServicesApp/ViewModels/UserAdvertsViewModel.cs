@@ -13,6 +13,10 @@ namespace TransportServicesApp.ViewModels
         public string Id { get; set; }
         public string CityFrom { get; set; }
         public string CityTo { get; set; }
+        public DateTime ExpireDate { get; set; }
+        public DateTime ExpireTime { get; set; }
+        public string Expire { get; set; }
+
 
         //request
         public bool AdditionalBaggage { get; set; }
@@ -23,6 +27,8 @@ namespace TransportServicesApp.ViewModels
 
         //passage
         public string PassengerLimit { get; set; }
+        public int SeatsTaken { get; set; }
+        public bool IsOccupied { get; set; }
         public string MaxSize { get; set; }
         public string MaxWeight { get; set; }
 

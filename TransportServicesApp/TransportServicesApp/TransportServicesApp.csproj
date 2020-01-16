@@ -9,19 +9,24 @@
   <ItemGroup>
     <Compile Remove="Migrations\20191216113345_FULL_TABLE_REMAKE.cs" />
     <Compile Remove="Migrations\20191216113345_FULL_TABLE_REMAKE.Designer.cs" />
+    <Compile Remove="Migrations\20200115132655_hangfire.cs" />
+    <Compile Remove="Migrations\20200115132655_hangfire.Designer.cs" />
   </ItemGroup>
 
 
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="4.3.1" />
     <PackageReference Include="FontAwesome" Version="4.7.0" />
+    <PackageReference Include="HangFire" Version="1.7.8" />
     <PackageReference Include="jQuery" Version="3.4.1" />
     <PackageReference Include="jQuery.UI.Combined" Version="1.12.1" />
+    <PackageReference Include="MailKit" Version="2.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
+    <PackageReference Include="Moment.js" Version="2.24.0" />
   </ItemGroup>
 
 

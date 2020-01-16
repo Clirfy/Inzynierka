@@ -1,7 +1,7 @@
 ﻿@model Advert
 
 @{
-    ViewData["Title"] = "AddRequestAdvert";
+    ViewData["Title"] = "Nowa prośba";
 }
 
 <h1 style="text-align:center">Nowa prośba przewozu</h1>
@@ -27,6 +27,13 @@
                         <input asp-for="CityTo" class="form-control" style="width:auto" />
                         <span asp-validation-for="CityTo" class="text-danger"></span>
                     </div>
+                    <div class="form-group">
+                        <label asp-for="ExpireDate" class="control-label">Data</label>
+                        <input asp-for="ExpireDate" type="date" />
+                        <label asp-for="ExpireTime" class="control-label">Godzina</label>
+                        <input asp-for="ExpireTime" type="time" />
+                    </div>
+
                 </div>
                 <div class="card-footer">
                     <label asp-for="AdvertOption" class="control-label">Rodzaj Prośby</label>
