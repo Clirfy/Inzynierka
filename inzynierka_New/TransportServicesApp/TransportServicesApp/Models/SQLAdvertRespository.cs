@@ -23,6 +23,13 @@ namespace TransportServicesApp.Models
             return advert;
         }
 
+        public Permanent AddPermanent(Permanent permanent)
+        {
+            dbContext.Permanents.Add(permanent);
+            dbContext.SaveChanges();
+            return permanent;
+        }
+
         public Advert DeleteAdvert(string advertId)
         {
             var advert = dbContext.Adverts.Find(advertId);
@@ -64,6 +71,11 @@ namespace TransportServicesApp.Models
                 .Where(n => n.AdvertType == "Oferta");
         }
 
+        public Permanent GetPermanent(string Id)
+        {
+            return dbContext.Permanents.Find(Id);
+        }
+
         public Request GetRequest(string Id)
         {
             return dbContext.Requests.Find(Id);
@@ -87,6 +99,12 @@ namespace TransportServicesApp.Models
         {
             return dbContext.Offers.Where(n => n.UserId == userId);
         }
+
+        public IEnumerable<Permanent> GetUserPermanents(string userId)
+        {
+            return dbContext.Permanents.Where(n => n.UserId == userId);
+        }
+
         public IEnumerable<Request> GetUserRequests(string userId)
         {
             return dbContext.Requests.Where(n => n.UserId == userId);
@@ -109,6 +127,15 @@ namespace TransportServicesApp.Models
             dbContext.SaveChanges();
 
             return offerChanges;
+        }
+
+        public Permanent UpdatePermanent(Permanent permanentChanges)
+        {
+            var advert = dbContext.Permanents.Attach(permanentChanges);
+            advert.State = EntityState.Modified;
+            dbContext.SaveChanges();
+
+            return permanentChanges;
         }
 
         public Request UpdateRequest(Request requestChanges)

@@ -18,5 +18,6 @@ namespace TransportServicesApp.Models
         public DbSet<Advert> Adverts { get; set; }
         public DbSet<Offer> Offers { get; set; }
         public DbSet<Request> Requests { get; set; }
+        public DbSet<Permanent> Permanents { get; set; }
     }
 }

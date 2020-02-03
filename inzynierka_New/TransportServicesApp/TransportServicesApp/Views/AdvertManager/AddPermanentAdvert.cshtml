@@ -1,0 +1,128 @@
+﻿@model AddPermanentViewModel
+
+@{
+    ViewData["Title"] = "Nowa oferta";
+}
+
+<h1 style="text-align: center">Nowa Oferta Stała</h1>
+
+<hr />
+
+<form asp-action="AddPermanentAdvert">
+    <div class="row mt-4 justify-content-md-center">
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Trasa
+                </div>
+
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="CityFrom" class="control-label">Miasto startowe</label>
+                        <input asp-for="CityFrom" class="form-control" style="width:auto" />
+                        <span asp-validation-for="CityFrom" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CityTo" class="control-label">Miasto docelowe</label>
+                        <input asp-for="CityTo" class="form-control" style="width:auto" />
+                        <span asp-validation-for="CityTo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ExpireDate" class="control-label">Data</label>
+                            <input asp-for="ExpireDate" type="date" />
+                        <label asp-for="ExpireTime" class="control-label">Godzina</label>
+                        <input asp-for="ExpireTime" type="time" />
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <label asp-for="RefreshPeriod" class="control-label">Odświeżanie Oferty</label>
+                    <div class="form-group">
+                        <div class="form-check form-check-inline">
+                            <input asp-for="RefreshPeriod" class="form-check-input" type="radio" id="dzien" value="1">
+                            <label class="form-check-label" for="dzien">Codziennie</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input asp-for="RefreshPeriod" class="form-check-input" type="radio" id="tydzien" value="2">
+                            <label class="form-check-label" for="tydzien">Co Tydzień</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input asp-for="RefreshPeriod" class="form-check-input" type="radio" id="miesiac" value="3" checked>
+                            <label class="form-check-label" for="miesiac">Co Miesiąc</label>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="card-footer">
+                    <label asp-for="AdvertOption" class="control-label">Rodzaj Oferty</label>
+                    <div class="form-group">
+                        <div class="form-check form-check-inline">
+                            <input asp-for="AdvertOption" class="form-check-input" type="radio" id="passengerRadio" value="1" onclick="ChangeAdvertType(1)">
+                            <label class="form-check-label" for="passengerRadio">Pasażer</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input asp-for="AdvertOption" class="form-check-input" type="radio" id="cargoRadio" value="2" onclick="ChangeAdvertType(2)">
+                            <label class="form-check-label" for="cargoRadio">Towar</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input asp-for="AdvertOption" class="form-check-input" type="radio" id="customRadio" value="0" onclick="ChangeAdvertType(0)" checked>
+                            <label class="form-check-label" for="customRadio">Niestandardowy</label>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Dodatkowe Informacje
+                </div>
+                <div class="card-body">
+                    <div id="passenger">
+                        <div class="form-group">
+                            <label id="passenger" asp-for="PassengerLimit" class="control-label">Limit pasażerów</label>
+                            <input type="number" asp-for="PassengerLimit" class="form-control" value="0" min="0" style="width:100px" />
+                            <span asp-validation-for="PassengerLimit" class="text-danger"></span>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="AdditionalBaggage" /> Miejsce na dodatkowy bagaż
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="cargo">
+                        <div class="form-group">
+                            <label asp-for="MaxSize" class="control-label">Max. wymiary</label>
+                            <input asp-for="MaxSize" class="form-control" placeholder="Np: 1 x 0.5 x 2m" />
+                            <span asp-validation-for="MaxSize" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MaxWeight" class="control-label">Max. waga</label>
+                            <label class="form-inline">
+                                <input type="number" asp-for="MaxWeight" class="form-control" value="0" min="0" style="width:100px" /> Kg
+                            </label>
+                            <span asp-validation-for="MaxWeight" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label">Opis</label>
+                        <textarea asp-for="Description" class="form-control" style="height: 135px;"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-right">
+                <div class="form-group">
+                    <hr />
+                    <input type="submit" value="Utwórz" class="btn btn-primary" style="width:100px" />
+                </div>
+                <div>
+                    <a asp-action="UserAdverts">Powrót</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

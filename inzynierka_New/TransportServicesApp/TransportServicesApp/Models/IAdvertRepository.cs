@@ -9,22 +9,26 @@ namespace TransportServicesApp.Models
     {
         // AdvertManagerController
         Advert AddAdvert(Advert advert);
+        Permanent AddPermanent(Permanent permanent);
 
         IEnumerable<Advert> GetAllAdverts();
 
         Advert GetAdvert(string Id);
         Offer GetOffer(string Id);
         Request GetRequest(string Id);
+        Permanent GetPermanent(string Id);
 
         IEnumerable<Advert> GetUserAdverts(string userId);
         IEnumerable<Offer> GetUserOffers(string userId);
         IEnumerable<Request> GetUserRequests(string userId);
+        IEnumerable<Permanent> GetUserPermanents(string userId);
 
         Advert DeleteAdvert(string advertId);
 
         Advert UpdateAdvert(Advert advertChanges);
         Offer UpdateOffer(Offer offerChanges);
         Request UpdateRequest(Request requestChanges);
+        Permanent UpdatePermanent(Permanent permanentChanges);
 
         //SearchController
         IEnumerable<Advert> GetAllResults(string cityFrom, string cityTo);

@@ -64,6 +64,8 @@
                                            asp-action="AddRequestAdvert">Nowa Prośba</a>
                                         <a class="dropdown-item" asp-controller="AdvertManager"
                                            asp-action="AddPassageAdvert">Nowa Oferta</a>
+                                        <a class="dropdown-item" asp-controller="AdvertManager"
+                                           asp-action="AddPermanentAdvert">Oferta Stała</a>
                                     </div>
                                 </div>
                             </li>
@@ -89,12 +91,12 @@
                         @if (signInManager.IsSignedIn(User))
                         {
                             @*<li class="nav-item">
-                                <form method="post" asp-controller="account" asp-action="logout">
-                                    <button type="submit" style="width:auto" class="nav-link btn btn-link  text-white">
-                                        <i class="fas fa-sign-out-alt"></i> Wyloguj @User.Identity.Name
-                                    </button>
-                                </form>
-                            </li>*@
+                                    <form method="post" asp-controller="account" asp-action="logout">
+                                        <button type="submit" style="width:auto" class="nav-link btn btn-link  text-white">
+                                            <i class="fas fa-sign-out-alt"></i> Wyloguj @User.Identity.Name
+                                        </button>
+                                    </form>
+                                </li>*@
                             //---------------------------------------------------------------------------------------------
                             <li>
                                 <div class="dropdown">

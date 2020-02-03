@@ -14178,11 +14178,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Wojas\\Desktop\\inzynierka_New\\TransportServicesApp\\TransportServicesApp\\TransportServicesApp.csproj",
+      "projectUniqueName": "C:\\Users\\Wojas\\Desktop\\Inzynierka\\inzynierka_New\\TransportServicesApp\\TransportServicesApp\\TransportServicesApp.csproj",
       "projectName": "TransportServicesApp",
-      "projectPath": "C:\\Users\\Wojas\\Desktop\\inzynierka_New\\TransportServicesApp\\TransportServicesApp\\TransportServicesApp.csproj",
+      "projectPath": "C:\\Users\\Wojas\\Desktop\\Inzynierka\\inzynierka_New\\TransportServicesApp\\TransportServicesApp\\TransportServicesApp.csproj",
       "packagesPath": "C:\\Users\\Wojas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Wojas\\Desktop\\inzynierka_New\\TransportServicesApp\\TransportServicesApp\\obj\\",
+      "outputPath": "C:\\Users\\Wojas\\Desktop\\Inzynierka\\inzynierka_New\\TransportServicesApp\\TransportServicesApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

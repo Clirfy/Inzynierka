@@ -20,6 +20,8 @@ namespace TransportServicesApp.Models
 
         [Required]
         public DateTime ExpireDate { get; set; }
+
+        [Required]
         public DateTime ExpireTime { get; set; }
 
         public string Description { get; set; }

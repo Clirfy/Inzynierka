@@ -21,6 +21,7 @@ namespace TransportServicesApp.Controllers
         public IActionResult Index()
         {
             RecurringJob.AddOrUpdate(() => hangfire.DeleteExpiredAdverts(), Cron.Daily);
+            RecurringJob.AddOrUpdate(() => hangfire.RefreshPermaAdverts(), Cron.Daily);
 
             return Ok();
         }

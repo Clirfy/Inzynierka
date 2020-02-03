@@ -145,6 +145,46 @@
                     </div>
                 </div>
             }
+            @if (advert.AdvertType == "Oferta Stała")
+            {
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Rodzaj Transportu:</label>
+                            <h6 class="text-black-50">Oferta Stala</h6>
+                        </div>
+                        @if (advert.AdvertOption == 1 || advert.AdvertOption == 0)
+                        {
+                            <div class="col-md-3">
+                                <label>Limit Pasażerów:</label>
+                                <h6 class="text-black-50">@advert.PassengerLimit</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Miejsce Na Dodatkowy Bagaż:</label>
+                                @if (advert.AdditionalBaggage == true)
+                                {
+                                    <h6 class="text-black-50">Tak</h6>
+                                }
+                                else
+                                {
+                                    <h6 class="text-black-50">Nie</h6>
+                                }
+                            </div>
+                        }
+                        @if (advert.AdvertOption == 2 || advert.AdvertOption == 0)
+                        {
+                            <div class="col-md-3">
+                                <label>Max. Rozmiary:</label>
+                                <h6 class="text-black-50">@advert.MaxSize</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Max. Waga:</label>
+                                <h6 class="text-black-50">@advert.MaxWeight</h6>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
 
 
             <div class="card-footer">
