@@ -93,7 +93,7 @@ namespace TransportServicesApp.Controllers
                     }
 
                     await signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("index", "home");
+                    return RedirectToAction("index", "search");
                 }
 
                 // If there are any errors, add them to the ModelState object
@@ -111,7 +111,7 @@ namespace TransportServicesApp.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
-            return RedirectToAction("index", "home");
+            return RedirectToAction("index", "search");
         }
 
         [HttpGet]
@@ -137,7 +137,7 @@ namespace TransportServicesApp.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("index", "home");
+                        return RedirectToAction("index", "search");
                     }
                 }
 
@@ -182,7 +182,7 @@ namespace TransportServicesApp.Controllers
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index","search");
             }
 
             foreach (var error in result.Errors)
@@ -190,7 +190,7 @@ namespace TransportServicesApp.Controllers
                 ModelState.AddModelError("", error.Description);
             }
 
-            return RedirectToAction("index","home");
+            return RedirectToAction("index", "search");
         }
 
 

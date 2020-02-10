@@ -275,17 +275,12 @@ namespace TransportServicesApp.Controllers
 
         public IActionResult BookAdvert(string email, string advertId)
         {
-            //var advert = advertRepository.GetAdvert(advertId);
-            //if (advert.AdvertOption == 1)
-            //{
-            //    advert.SeatsTaken += 1;
-            //    advertRepository.UpdateAdvert(advert);
-            //}
-            //else
-            //{
-            //    advert.IsOcuppied = true;
-            //    advertRepository.UpdateAdvert(advert);
-            //}
+            var advert = advertRepository.GetOffer(advertId);
+            if (advert.AdvertOption == 1)
+            {
+                advert.SeatsTaken += 1;
+                advertRepository.UpdateOffer(advert);
+            }
             try
             {
                 SendMail(email);
@@ -295,7 +290,7 @@ namespace TransportServicesApp.Controllers
 
                 throw;
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "search");
         }
 
         private void SendMail(string email)
